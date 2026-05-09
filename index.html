@@ -1,68 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABR Panel</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABR Panel - Professional SMM Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="dark-theme">
 
-<header>
-  <div class="logo">ABR<span>Panel</span></div>
+    <nav class="navbar">
+        <div class="logo">ABR<span>Panel</span></div>
+        <div class="nav-right">
+            <span class="balance-btn">Balance: $0.00</span>
+            <div class="profile-img">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User">
+            </div>
+        </div>
+    </nav>
 
-  <div class="header-icons">
-    <i class="fas fa-bell"></i>
-    <i class="fas fa-user-circle"></i>
-  </div>
-</header>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul>
+                <li class="active"><i class="fas fa-shopping-cart"></i> New Order</li>
+                <li><i class="fas fa-list-alt"></i> Order History</li>
+                <li onclick="showSection('payment')"><i class="fas fa-wallet"></i> Add Funds</li>
+                <li><i class="fas fa-headset"></i> Support</li>
+                <li><i class="fas fa-user-shield"></i> Admin Panel</li>
+            </ul>
+        </aside>
 
-<section class="hero">
-  <h1>Professional SMM Services</h1>
-  <p>Fast • Secure • Affordable</p>
+        <!-- Main Content -->
+        <main class="content">
+            <section id="order-section">
+                <div class="card">
+                    <h2><i class="fas fa-plus-circle"></i> Create New Order</h2>
+                    <form id="orderForm">
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Facebook Followers [BD]</option>
+                            <option>YouTube Subscribers [Non-Drop]</option>
+                            <option>Instagram Likes [Real]</option>
+                        </select>
 
-  <div class="hero-buttons">
-    <a href="login.html">Login</a>
-    <a href="signup.html">Signup</a>
-  </div>
-</section>
+                        <label>Service</label>
+                        <select id="service">
+                            <option>Facebook Profile Followers - $1.20 per 1k</option>
+                        </select>
 
-<section class="stats-grid">
+                        <label>Link</label>
+                        <input type="url" placeholder="https://facebook.com/username" required>
 
-  <div class="stat-card">
-    <i class="fas fa-users"></i>
-    <div>
-      <p>Total Users</p>
-      <h2>1200+</h2>
+                        <label>Quantity</label>
+                        <input type="number" id="qty" placeholder="Min: 100 - Max: 5000" oninput="calcCharge()">
+
+                        <div class="charge-display">
+                            Total Charge: <span id="charge">$0.00</span>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Submit Order</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Payment Section -->
+            <section id="payment-section" style="display:none;">
+                <div class="card payment-card">
+                    <h2><i class="fas fa-university"></i> Add Funds (Manual)</h2>
+                    <p class="notice">বিকাশ/নগদ/রকেট (Personal) নাম্বারে টাকা পাঠিয়ে ট্রানজেকশন আইডি দিন।</p>
+                    <div class="payment-methods">
+                        <div class="method"><strong>bKash:</strong> 01766380931</div>
+                        <div class="method"><strong>Nagad:</strong> 01766380931</div>
+                        <div class="method"><strong>Rocket:</strong> 01766380931</div>
+                    </div>
+                    <form id="payForm">
+                        <input type="text" placeholder="Amount (USD)" required>
+                        <input type="text" placeholder="Transaction ID (TRXID)" required>
+                        <button class="btn-primary">Verify Payment</button>
+                    </form>
+                </div>
+            </section>
+        </main>
     </div>
-  </div>
 
-  <div class="stat-card">
-    <i class="fas fa-shopping-cart"></i>
-    <div>
-      <p>Total Orders</p>
-      <h2>25K+</h2>
-    </div>
-  </div>
-
-  <div class="stat-card">
-    <i class="fas fa-globe"></i>
-    <div>
-      <p>Worldwide Clients</p>
-      <h2>90+</h2>
-    </div>
-  </div>
-
-  <div class="stat-card">
-    <i class="fas fa-headset"></i>
-    <div>
-      <p>24/7 Support</p>
-      <h2>Online</h2>
-    </div>
-  </div>
-
-</section>
-
+    <script src="script.js"></script>
 </body>
 </html> 
