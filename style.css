@@ -55,3 +55,18 @@ input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 10px 
 .main-content { flex: 1; padding: 40px; }
 .page { display: none; }
 .page.active { display: block; }
+.mini-card {
+    background: var(--glass);
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 70px;
+    transition: 0.3s;
+}
+
+.mini-card i { font-size: 24px; margin-bottom: 5px; }
+.mini-card span { font-size: 12px; font-weight: bold; }
+.mini-card:hover { transform: translateY(-5px); border-color: var(--primary); } 
