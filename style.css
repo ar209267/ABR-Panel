@@ -93,3 +93,14 @@ input, select {
 }
 
 .notice-box { padding: 20px; background: #252525; border-top: 5px solid var(--primary-orange); margin: 20px; border-radius: 10px;}
+body{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+    padding-top:50px;
+}
+
+h1{
+    color:#38bdf8;
+}
