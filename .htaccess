@@ -1,0 +1,25 @@
+# ১. ফোল্ডারের ভেতর ফাইল লিস্ট দেখা বন্ধ করা (Security)
+Options -Indexes
+
+# ২. গুরুত্বপূর্ণ ফাইলগুলোতে সাধারণ মানুষের এক্সেস বন্ধ করা
+<FilesMatch "^\.|\.config$|\.php$|\.sql$|\.log$|composer\.json|package\.json">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
+
+# ৩. XSS প্রোটেকশন (হ্যাকিং স্ক্রিপ্ট ব্লক করা)
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ৪. ফাইল আপলোড সাইজ লিমিট করা (সার্ভার সেফটি)
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
+# ৫. ইউজারকে সরাসরি HTTPS-এ পাঠানো (SSL থাকলে)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
