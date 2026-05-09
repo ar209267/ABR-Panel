@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | ABR Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="dark-theme">
 
-<header>
-  <div class="logo">ABR<span>Admin</span></div>
-</header>
+    <nav class="navbar">
+        <div class="logo">ABR<span>Admin</span></div>
+        <div class="nav-right">
+            <button onclick="window.location.href='index.html'" class="btn-main" style="padding: 8px 15px;">Back to User Site</button>
+        </div>
+    </nav>
 
-<div class="admin-grid">
+    <div class="container" style="display: flex; padding: 20px; gap: 20px; flex-wrap: wrap;">
+        
+        <!-- ইউজার ব্যালেন্স কন্ট্রোল -->
+        <div class="card-glass" style="flex: 1; min-width: 300px; margin: 0;">
+            <h3><i class="fas fa-coins"></i> Update User Balance</h3>
+            <form id="balanceForm" style="margin-top: 15px;">
+                <label>User Email/Username</label>
+                <input type="text" id="targetUser" placeholder="Enter user id" required>
+                <label>Amount ($)</label>
+                <input type="number" id="addAmount" placeholder="e.g. 10.00" required>
+                <button type="submit" class="btn-main" style="margin-top: 10px;">Add Balance</button>
+            </form>
+        </div>
 
-  <div class="admin-card">
-    <i class="fas fa-users"></i>
-    <h2>1200</h2>
-    <p>Total Users</p>
-  </div>
+        <!-- অর্ডার ম্যানেজমেন্ট -->
+        <div class="card-glass" style="flex: 1; min-width: 300px; margin: 0;">
+            <h3><i class="fas fa-tasks"></i> Recent Orders</h3>
+            <div id="adminOrderList" style="margin-top: 15px; font-size: 14px; color: var(--text-muted);">
+                <p>No new orders to show.</p>
+            </div>
+        </div>
 
-  <div class="admin-card">
-    <i class="fas fa-cart-plus"></i>
-    <h2>5500</h2>
-    <p>Total Orders</p>
-  </div>
+        <!-- সাইট নোটিশ কন্ট্রোল -->
+        <div class="card-glass" style="flex: 1; min-width: 300px; margin: 0;">
+            <h3><i class="fas fa-bullhorn"></i> Site Announcement</h3>
+            <textarea id="siteNotice" style="width: 100%; background: #0f172a; color: white; border-radius: 8px; padding: 10px; margin-top: 10px;" rows="4" placeholder="Type important notice for users..."></textarea>
+            <button class="btn-main" style="margin-top: 10px;" onclick="updateNotice()">Update Notice</button>
+        </div>
 
-  <div class="admin-card">
-    <i class="fas fa-dollar-sign"></i>
-    <h2>$850</h2>
-    <p>Total Earnings</p>
-  </div>
+    </div>
 
-</div>
+    <script>
+        document.getElementById('balanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let user = document.getElementById('targetUser').value;
+            let amount = document.getElementById('addAmount').value;
+            alert(`Success: $${amount} added to ${user}'s account!`);
+        });
 
-<div class="admin-actions">
-
-  <button>Add Service</button>
-  <button>Manage Users</button>
-  <button>Payment Requests</button>
-  <button>Logout</button>
-
-</div>
-
+        function updateNotice() {
+            let notice = document.getElementById('siteNotice').value;
+            alert("Site Notice Updated: " + notice);
+        }
+    </script>
 </body>
 </html> 
