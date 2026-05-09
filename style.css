@@ -1,85 +1,184 @@
 :root {
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
-    --primary-color: #ff8c00;
-    --text-color: #ffffff;
-    --secondary-text: #b3b3b3;
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --primary-color: #ff8c00;
+  --text-color: #ffffff;
+  --secondary-text: #b3b3b3;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: #1a1a1a;
-    border-bottom: 1px solid #333;
+body{
+  background:var(--bg-color);
+  color:var(--text-color);
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2196f3;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  background:#1a1a1a;
+  border-bottom:1px solid #333;
 }
 
-.logo span {
-    color: var(--primary-color);
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  color:#2196f3;
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 20px;
+.logo span{
+  color:var(--primary-color);
 }
 
-.stat-card {
-    background: var(--card-bg);
-    padding: 15px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.header-icons{
+  display:flex;
+  gap:15px;
 }
 
-.social-bar {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
+.header-icons i{
+  font-size:20px;
 }
 
-.order-form {
-    background: var(--card-bg);
-    padding: 20px;
-    margin: 20px;
-    border-radius: 15px;
-    border-top: 5px solid var(--primary-color);
+.hero{
+  text-align:center;
+  padding:80px 20px;
 }
 
-select, input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    background: #2a2a2a;
-    border: 1px solid #444;
-    border-radius: 8px;
-    color: white;
+.hero h1{
+  font-size:42px;
+  margin-bottom:15px;
 }
 
-.submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: var(--primary-color);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    margin-top: 20px;
+.hero p{
+  color:var(--secondary-text);
+  margin-bottom:25px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+
+.hero-buttons a{
+  text-decoration:none;
+  background:var(--primary-color);
+  color:white;
+  padding:14px 30px;
+  border-radius:10px;
+}
+
+.stats-grid,
+.dashboard-grid,
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.stat-card,
+.dashboard-card,
+.admin-card{
+  background:var(--card-bg);
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.stat-card i,
+.dashboard-card i,
+.admin-card i{
+  font-size:35px;
+  color:var(--primary-color);
+  margin-bottom:15px;
+}
+
+.auth-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.auth-box{
+  background:var(--card-bg);
+  width:350px;
+  padding:35px;
+  border-radius:15px;
+}
+
+.auth-box h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.auth-box input,
+.payment-box input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+  background:#2b2b2b;
+  color:white;
+}
+
+.auth-box button,
+.payment-box button,
+.admin-actions button{
+  width:100%;
+  padding:14px;
+  background:var(--primary-color);
+  border:none;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+}
+
+.auth-box p{
+  text-align:center;
+  margin-top:15px;
+}
+
+.auth-box a{
+  color:var(--primary-color);
+}
+
+.payment-box{
+  background:var(--card-bg);
+  margin:20px;
+  padding:25px;
+  border-radius:15px;
+}
+
+.payment-box h3{
+  margin:15px 0;
+  color:var(--primary-color);
+}
+
+.admin-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+  }
+
 }
