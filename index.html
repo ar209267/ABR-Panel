@@ -1,108 +1,109 @@
-export default function SMMDashboard() { return ( <div className="min-h-screen bg-black text-white p-4"> <div className="max-w-md mx-auto"> {/* Header */} <div className="flex items-center justify-between bg-zinc-900 p-3 rounded-2xl shadow-lg mb-4"> <div className="flex items-center gap-3"> <div className="text-2xl">☰</div> <h1 className="text-2xl font-bold text-orange-500">MarufSMM</h1> </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABR Panel - Professional SMM Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
 
-<div className="flex items-center gap-2">
-        <button className="bg-black border border-zinc-700 rounded-full w-10 h-10 flex items-center justify-center">
-          ☀️
-        </button>
-        <button className="bg-white text-black rounded-full w-10 h-10 flex items-center justify-center">
-          🌙
-        </button>
-        <img
-          src="https://i.pravatar.cc/100"
-          alt="profile"
-          className="w-10 h-10 rounded-full border-2 border-orange-500"
-        />
-      </div>
-    </div>
-
-    {/* Stats Cards */}
-    <div className="grid grid-cols-2 gap-3 mb-4">
-      <div className="bg-zinc-900 border border-orange-500 rounded-2xl p-4 shadow-lg">
-        <p className="text-zinc-400 text-sm">Username</p>
-        <h2 className="text-2xl font-bold">rvai80054</h2>
-      </div>
-
-      <div className="bg-zinc-900 border border-orange-500 rounded-2xl p-4 shadow-lg">
-        <p className="text-zinc-400 text-sm">Balance</p>
-        <h2 className="text-2xl font-bold text-green-400">$0.124</h2>
-      </div>
-
-      <div className="bg-zinc-900 border border-orange-500 rounded-2xl p-4 shadow-lg">
-        <p className="text-zinc-400 text-sm">Total Cost</p>
-        <h2 className="text-2xl font-bold">$1.876</h2>
-      </div>
-
-      <div className="bg-zinc-900 border border-orange-500 rounded-2xl p-4 shadow-lg">
-        <p className="text-zinc-400 text-sm">Orders</p>
-        <h2 className="text-2xl font-bold">1734141</h2>
-      </div>
-    </div>
-
-    {/* Social Buttons */}
-    <div className="grid grid-cols-4 gap-3 mb-6">
-      {[
-        "📘",
-        "📷",
-        "📨",
-        "▶️",
-        "🎮",
-        "💼",
-        "💬",
-        "🎵",
-      ].map((icon, index) => (
-        <div
-          key={index}
-          className="bg-zinc-900 h-16 rounded-2xl flex items-center justify-center text-3xl border border-zinc-700"
-        >
-          {icon}
+    <!-- Header Section -->
+    <header>
+        <div class="logo">ABR<span>Panel</span></div>
+        <div class="header-icons">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon active"></i>
+            <i class="fas fa-sync-alt"></i>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User">
+            </div>
         </div>
-      ))}
-    </div>
+    </header>
 
-    {/* Action Buttons */}
-    <div className="bg-orange-500 rounded-2xl p-4 mb-5 shadow-lg">
-      <div className="flex gap-3">
-        <button className="flex-1 bg-white text-black py-3 rounded-xl font-bold hover:scale-105 transition">
-          Create Order
-        </button>
-        <button className="flex-1 bg-black text-white py-3 rounded-xl font-bold border border-white hover:scale-105 transition">
-          Add Funds
-        </button>
-      </div>
-    </div>
-
-    {/* Search */}
-    <div className="bg-zinc-900 rounded-2xl p-4 shadow-lg border border-zinc-800">
-      <input
-        type="text"
-        placeholder="Search Services..."
-        className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white outline-none"
-      />
-
-      <div className="mt-5">
-        <h3 className="text-lg font-semibold mb-2">Category</h3>
-        <div className="bg-black border border-zinc-700 rounded-xl p-3 flex items-center gap-3">
-          <span className="text-2xl">📘</span>
-          <p>Facebook Live Stream React</p>
+    <!-- Main Dashboard -->
+    <main>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-user-circle"></i>
+                <div>
+                    <p>Username</p>
+                    <h3>ABR_User</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-wallet"></i>
+                <div>
+                    <p>Remaining balance</p>
+                    <h3>$0.00</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <div>
+                    <p>Total Cost</p>
+                    <h3>$0.00</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shopping-cart"></i>
+                <div>
+                    <p>Total Orders</p>
+                    <h3>0</h3>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div className="mt-5">
-        <h3 className="text-lg font-semibold mb-2">Service</h3>
-        <div className="bg-black border border-zinc-700 rounded-xl p-3 flex items-center gap-3">
-          <span className="bg-orange-500 px-2 py-1 rounded-lg text-black font-bold">
-            774
-          </span>
-          <p>Facebook Livestream React | Like 👍</p>
+        <!-- Social Icons Bar -->
+        <div class="social-bar">
+            <button><i class="fab fa-facebook-f"></i></button>
+            <button><i class="fab fa-instagram"></i></button>
+            <button><i class="fab fa-telegram-plane"></i></button>
+            <button><i class="fab fa-youtube"></i></button>
+            <button><i class="fab fa-whatsapp"></i></button>
         </div>
-      </div>
+
+        <!-- Order Section -->
+        <div class="order-container">
+            <div class="order-header">
+                <button class="active"><i class="fas fa-cart-plus"></i> Create Order</button>
+                <button><i class="fas fa-plus-circle"></i> Add Funds</button>
+            </div>
+            
+            <div class="order-form">
+                <label>Category</label>
+                <select>
+                    <option>Select a Category</option>
+                    <option>Facebook Followers</option>
+                    <option>YouTube Subscribers</option>
+                </select>
+
+                <label>Service</label>
+                <select>
+                    <option>Select a Service</option>
+                </select>
+
+                <label>Link</label>
+                <input type="text" placeholder="https://yourlink.com">
+
+                <label>Quantity</label>
+                <input type="number" placeholder="Min: 100 - Max: 5000">
+
+                <div class="charge-box">
+                    <span>Charge</span>
+                    <strong>$0.00</strong>
+                </div>
+
+                <button class="submit-btn">Submit Order</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Help Button -->
+    <div class="floating-help">
+        <i class="fas fa-headset"></i>
     </div>
 
-    {/* Floating Support Button */}
-    <button className="fixed bottom-6 right-6 bg-purple-600 w-16 h-16 rounded-full text-3xl shadow-2xl hover:scale-110 transition">
-      🎧
-    </button>
-  </div>
-</div>
-
-); }
+</body>
+</html>
