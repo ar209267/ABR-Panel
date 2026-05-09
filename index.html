@@ -1,50 +1,180 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard | ABR Panel</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABR Premium Panel | Next-Gen SMM</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF8C00; /* Deep Orange */
+            --bg-dark: #0B0E14;
+            --card-dark: #161B22;
+            --text-main: #E6EDF3;
+            --accent-blue: #2F81F7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
+
+        /* Glassmorphism Sidebar */
+        .sidebar {
+            width: 260px; height: 100vh; background: var(--card-dark);
+            position: fixed; border-right: 1px solid #30363d; padding: 20px;
+        }
+
+        .nav-item {
+            padding: 12px 15px; margin: 8px 0; border-radius: 10px;
+            display: flex; align-items: center; gap: 12px; cursor: pointer;
+            transition: 0.3s; color: #8b949e; text-decoration: none;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 140, 0, 0.1); color: var(--primary);
+        }
+
+        /* Top Bar */
+        .top-nav {
+            margin-left: 260px; padding: 15px 40px;
+            background: rgba(11, 14, 20, 0.8); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+        }
+
+        /* Main Content */
+        .content-body { margin-left: 260px; padding: 40px; }
+
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        
+        .stat-card {
+            background: var(--card-dark); padding: 25px; border-radius: 16px;
+            border: 1px solid #30363d; position: relative; overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary);
+        }
+
+        /* Order Form */
+        .order-section {
+            margin-top: 30px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px;
+        }
+
+        .glass-form {
+            background: var(--card-dark); padding: 30px; border-radius: 20px; border: 1px solid #30363d;
+        }
+
+        .input-box { width: 100%; background: #0d1117; border: 1px solid #30363d; padding: 15px; border-radius: 10px; color: white; margin-bottom: 20px; font-size: 16px; }
+
+        .btn-premium {
+            width: 100%; background: linear-gradient(45deg, #FF8C00, #FF5F1F);
+            color: white; border: none; padding: 16px; border-radius: 12px;
+            font-weight: 700; cursor: pointer; transition: 0.4s;
+        }
+
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 140, 0, 0.3); }
+
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .top-nav, .content-body { margin-left: 0; }
+            .order-section { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo" style="font-size:24px; font-weight:800; color:#2563eb;">ABR<span style="color:white;">Panel</span></div>
-        <div class="nav-right" style="display:flex; align-items:center;">
-            <div style="background:rgba(37,99,235,0.2); padding:8px 15px; border-radius:50px; border:1px solid #2563eb; margin-right:15px;">
-                Balance: $0.00
+    <aside class="sidebar">
+        <h2 style="color: var(--primary); margin-bottom: 30px;">ABR <span style="color:white">PRO</span></h2>
+        <a href="#" class="nav-item active"><i class="fas fa-shopping-cart"></i> New Order</a>
+        <a href="#" class="nav-item"><i class="fas fa-list"></i> Services</a>
+        <a href="#" class="nav-item"><i class="fas fa-wallet"></i> Add Funds</a>
+        <a href="#" class="nav-item"><i class="fas fa-ticket-alt"></i> Support</a>
+        <a href="#" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    </aside>
+
+    <div class="top-nav">
+        <div class="search-bar"><i class="fas fa-search" style="color: #8b949e;"></i></div>
+        <div class="user-meta" style="display: flex; gap: 20px; align-items: center;">
+            <div style="text-align: right;">
+                <p style="font-weight: 600;">Atiqur Rahman</p>
+                <small style="color: var(--primary);">Premium Member</small>
             </div>
-            <button onclick="window.location.href='login.html'" style="background:none; border:none; color:#94a3b8; cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <img src="https://via.placeholder.com/40" style="border-radius: 50%; border: 2px solid var(--primary);">
         </div>
-    </nav>
-
-    <div class="wrapper">
-        <aside class="sidebar">
-            <ul style="list-style:none;">
-                <li class="active" style="padding:15px; background:#2563eb; border-radius:12px; margin-bottom:10px; cursor:pointer;"><i class="fas fa-shopping-cart"></i> New Order</li>
-                <li style="padding:15px; color:#94a3b8; cursor:pointer;" onclick="alert('History is empty')"><i class="fas fa-history"></i> Order History</li>
-                <li style="padding:15px; color:#94a3b8; cursor:pointer;"><i class="fas fa-wallet"></i> Add Funds</li>
-            </ul>
-        </aside>
-
-        <main class="main-content">
-            <div class="card-glass" style="max-width:700px; margin:0 auto;">
-                <h2>Create New Order</h2>
-                <form>
-                    <label>Category</label>
-                    <select><option>Facebook Followers [BD]</option></select>
-                    <label>Link</label>
-                    <input type="url" placeholder="https://facebook.com/..." required style="margin-bottom:15px;">
-                    <button class="btn-main">Submit Order</button>
-                </form>
-            </div>
-        </main>
     </div>
 
-    <!-- Floating WhatsApp Support Button -->
-    <a href="https://wa.me/8801766380931" target="_blank" style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; box-shadow:0 5px 15px rgba(0,0,0,0.3); text-decoration:none;">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <main class="content-body">
+        <div class="dashboard-grid">
+            <div class="stat-card"><h3>$1,250.00</h3><p style="color:#8b949e">Total Spent</p></div>
+            <div class="stat-card"><h3>$45.50</h3><p style="color:#8b949e">Account Balance</p></div>
+            <div class="stat-card"><h3>1,402</h3><p style="color:#8b949e">Total Orders</p></div>
+            <div class="stat-card"><h3>Active</h3><p style="color:#8b949e">Account Status</p></div>
+        </div>
 
+        <div class="order-section">
+            <div class="glass-form">
+                <h3 style="margin-bottom: 25px;">Place Custom Order</h3>
+                
+                <label>Category</label>
+                <select class="input-box">
+                    <option>Facebook Followers - High Quality</option>
+                    <option>TikTok Views - Instant Start</option>
+                    <option>YouTube Watch Time - 4000H</option>
+                </select>
+
+                <label>Service</label>
+                <select class="input-box" id="serviceSelect">
+                    <option value="0.5">FB Real Followers | R30 | $0.50 per 1k</option>
+                    <option value="1.2">TikTok Viral Views | Instant | $1.20 per 1k</option>
+                </select>
+
+                <label>Target URL</label>
+                <input type="text" class="input-box" placeholder="https://www.facebook.com/atiq.pro">
+
+                <label>Quantity</label>
+                <input type="number" class="input-box" id="qtyInput" placeholder="Min: 100 - Max: 500k">
+
+                <div style="background: #1c2128; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                    <span style="color: #8b949e;">Total Charge:</span>
+                    <span id="finalPrice" style="float: right; color: var(--primary); font-weight: bold; font-size: 1.2rem;">$0.00</span>
+                </div>
+
+                <button class="btn-premium">SUBMIT ORDER</button>
+            </div>
+
+            <div class="glass-form" style="border-top: 5px solid var(--primary);">
+                <h4 style="margin-bottom: 15px;"><i class="fas fa-bullhorn"></i> Official Notice</h4>
+                <p style="font-size: 14px; line-height: 1.6; color: #8b949e;">
+                    আমাদের সার্ভারে নতুন **High-Speed TikTok Followers** যুক্ত করা হয়েছে। ৫০০০ ফলোয়ার কিনলে এখন থেকে বোনাস পাবেন। যেকোনো সমস্যায় সাপোর্ট টিকেটে যোগাযোগ করুন।
+                </p>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #30363d;">
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <i class="fab fa-facebook" style="font-size: 20px;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                    <i class="fab fa-telegram" style="font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // হার্ডকোর ক্যালকুলেশন ইঞ্জিন
+        const qty = document.getElementById('qtyInput');
+        const service = document.getElementById('serviceSelect');
+        const priceDisplay = document.getElementById('finalPrice');
+
+        qty.addEventListener('input', () => {
+            const pricePer1k = parseFloat(service.value);
+            const amount = parseInt(qty.value);
+            if (amount > 0) {
+                const total = (pricePer1k / 1000) * amount;
+                priceDisplay.innerText = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 3});
+            } else {
+                priceDisplay.innerText = '$0.00';
+            }
+        });
+    </script>
 </body>
 </html> 
