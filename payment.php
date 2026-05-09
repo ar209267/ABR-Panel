@@ -1,13 +1,17 @@
-<form action="ssl-request.php" method="POST">
+<?php
+// Security: SQL Injection প্রোটেকশন
+session_start();
+include('db_config.php'); // আপনার ডাটাবেজ কানেকশন ফাইল
 
-<input type="number"
-name="amount"
-placeholder="Enter Amount">
+if ($_SERVER['REQUEST_ID'] == 'POST') {
+    $amount = $_POST['amount'];
+    $user_id = $_SESSION['user_id'];
 
-<button type="submit">
-
-Pay With bKash / Nagad
-
-</button>
-
-</form> 
+    // SSLCommerz বা পেমেন্ট গেটওয়ে API কল এখানে হবে
+    // উদাহরণস্বরূপ একটি সিম্পল রিডাইরেক্ট লজিক:
+    if($amount > 0) {
+        header("Location: https://your-gateway-link.com/pay?amount=" . $amount);
+        exit();
+    }
+}
+?>
