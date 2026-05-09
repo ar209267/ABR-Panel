@@ -52,4 +52,16 @@ function calculateCharge() {
         // ৪টি দশমিক স্থান পর্যন্ত দেখাবে যাতে ছোট অ্যামাউন্টও বোঝা যায়
         chargeDisplay.innerText = "$" + total.toFixed(4); 
     }
+
+}
+function calculateTotal() {
+    let pricePer1k = document.getElementById('service').value;
+    let qty = document.getElementById('quantity').value;
+    let total = (pricePer1k / 1000) * qty;
+    
+    document.getElementById('totalCharge').innerText = "$" + total.toFixed(3);
+}
+
+function updatePrice() {
+    calculateTotal();
 }
