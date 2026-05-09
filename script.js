@@ -35,3 +35,21 @@ function handlePayment(event) {
 
 // Initial Setup
 console.log("ABR Panel v1.0 Loaded - Professional Edition");
+function calculateCharge() {
+    const qtyInput = document.getElementById('qty');
+    const chargeDisplay = document.getElementById('totalCharge');
+    
+    // আপনার টার্গেট রেট: ৫০০০ ফলোয়ার = ১ ডলার
+    // সুতরাং ১টি ফলোয়ারের দাম = ১ / ৫০০০ = ০.০০০২ ডলার
+    const ratePerFollower = 0.0002; 
+    
+    let quantity = parseFloat(qtyInput.value);
+    
+    if (isNaN(quantity) || quantity <= 0) {
+        chargeDisplay.innerText = "$0.0000";
+    } else {
+        let total = quantity * ratePerFollower;
+        // ৪টি দশমিক স্থান পর্যন্ত দেখাবে যাতে ছোট অ্যামাউন্টও বোঝা যায়
+        chargeDisplay.innerText = "$" + total.toFixed(4); 
+    }
+}
