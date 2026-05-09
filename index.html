@@ -3,139 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR All-in-One Panel</title>
+    <title>ABR PRO | Premium SMM Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --primary: #FF8C00; --bg: #0B0E14; --card: #161B22; --text: #E6EDF3; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; }
-        
-        /* Sidebar */
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; }
         .sidebar { width: 250px; height: 100vh; background: var(--card); padding: 20px; position: fixed; border-right: 1px solid #30363d; }
         .nav-item { padding: 12px; display: block; color: #8b949e; text-decoration: none; border-radius: 8px; margin-bottom: 10px; transition: 0.3s; }
-        .nav-item:hover, .nav-item.active { background: rgba(255,140,0,0.1); color: var(--primary); }
-
-        /* Main Content */
+        .nav-item.active { background: rgba(255, 140, 0, 0.1); color: var(--primary); }
         .main-content { margin-left: 250px; padding: 40px; width: 100%; }
-        .order-box { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid #30363d; max-width: 650px; margin-bottom: 20px; }
-        
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #8b949e; }
-        input, select { 
-            width: 100%; padding: 12px; margin-bottom: 20px; 
-            background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 8px; 
-        }
-
-        .price-tag { background: #1c2128; padding: 20px; border-radius: 10px; text-align: center; font-size: 1.3rem; font-weight: bold; color: var(--primary); border: 1px dashed var(--primary); }
-        .btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,140,0,0.3); }
-
-        .auth-buttons { position: absolute; bottom: 20px; width: 210px; }
+        .order-box { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid #30363d; max-width: 600px; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 20px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 8px; }
+        .price-display { background: #1c2128; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; border: 1px dashed var(--primary); }
+        .btn-submit { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2 style="color: var(--primary); border-bottom: 1px solid #333; padding-bottom: 10px;">ABR PRO</h2>
-        <a href="index.html" class="nav-item active"><i class="fas fa-plus-circle"></i> New Order</a>
+        <h2 style="color: var(--primary);">ABR PRO</h2>
+        <a href="#" class="nav-item active"><i class="fas fa-plus-circle"></i> New Order</a>
         <a href="payment.php" class="nav-item"><i class="fas fa-wallet"></i> Add Funds (টাকা জমা)</a>
         <a href="admin.html" class="nav-item"><i class="fas fa-user-shield"></i> Admin Panel</a>
-        
-        <div class="auth-buttons">
-            <a href="login.html" class="nav-item" style="border: 1px solid #333;"><i class="fas fa-sign-in-alt"></i> Login</a>
-            <a href="signup.html" class="nav-item" style="border: 1px solid #333;"><i class="fas fa-user-plus"></i> Sign Up</a>
+        <div style="margin-top: 50px;">
+            <a href="login.html" class="nav-item"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="signup.html" class="nav-item"><i class="fas fa-user-plus"></i> Sign Up</a>
         </div>
     </div>
 
     <div class="main-content">
         <div class="order-box">
-            <h3 style="margin-top: 0;"><i class="fas fa-cart-arrow-down"></i> Create New Order</h3>
+            <h3><i class="fas fa-shopping-cart"></i> Create Order</h3>
             
-            <label>Select Platform & Service</label>
+            <label>Platform & Service</label>
             <select id="service" onchange="calculate()">
-                <!-- Facebook Services -->
-                <optgroup label="Facebook Services">
-                    <option value="0.20">Facebook Followers (Mix) - $0.20/1k</option>
-                    <option value="1.50">Facebook Followers (Real) - $1.50/1k</option>
-                    <option value="0.10">Facebook Post Likes - $0.10/1k</option>
+                <optgroup label="Facebook">
+                    <option value="0.20">FB Followers (Mix) - $0.20/1k</option>
+                    <option value="1.50">FB Followers (Real) - $1.50/1k</option>
                 </optgroup>
-                <!-- TikTok Services -->
-                <optgroup label="TikTok Services">
-                    <option value="0.05">TikTok Video Views - $0.05/1k</option>
-                    <option value="0.80">TikTok Real Followers - $0.80/1k</option>
-                    <option value="0.30">TikTok Video Likes - $0.30/1k</option>
+                <optgroup label="TikTok">
+                    <option value="0.05">TikTok Views - $0.05/1k</option>
+                    <option value="0.80">TikTok Followers - $0.80/1k</option>
                 </optgroup>
-                <!-- YouTube Services -->
-                <optgroup label="YouTube Services">
-                    <option value="2.50">YouTube Subscribers (Non-Drop) - $2.50/1k</option>
-                    <option value="4.00">YouTube Watch Time (4000H) - $4.00/1k</option>
-                </optgroup>
-                <!-- Instagram & Others -->
-                <optgroup label="Other Services">
+                <optgroup label="Others">
+                    <option value="2.50">YouTube Subscribers - $2.50/1k</option>
                     <option value="0.40">Instagram Followers - $0.40/1k</option>
-                    <option value="0.15">WhatsApp Channel Members - $0.15/1k</option>
                 </optgroup>
             </select>
 
-            <label>Link (প্রোফাইল বা ভিডিও লিঙ্ক)</label>
-            <input type="text" placeholder="https://www.social.com/profile_link">
+            <label>Link</label>
+            <input type="text" id="link" placeholder="https://social.com/profile">
 
-            <label>Quantity (কতগুলো নিবেন?)</label>
-            <input type="number" id="qty" placeholder="Min: 100 - Max: 100,000" oninput="calculate()">
+            <label>Quantity</label>
+            <input type="number" id="qty" placeholder="e.g. 1000" oninput="calculate()">
 
-            <div class="price-tag">
-                <span>Estimated Cost: </span>
-                <span id="totalDisplay">$0.000</span>
+            <div class="price-display" id="priceBox">
+                <div style="color: var(--primary); font-size: 20px; font-weight: bold;" id="usdPrice">$0.000 (USD)</div>
+                <div style="color: #00ff00; font-size: 16px;" id="bdtPrice">৳0.00 (BDT)</div>
             </div>
-            <br>
-            <button class="btn">PLACE ORDER NOW</button>
-        </div>
 
-        <div style="color: #8b949e; font-size: 14px; max-width: 650px; background: #1c2128; padding: 15px; border-radius: 10px;">
-            <i class="fas fa-info-circle"></i> <strong>Note:</strong> টাকা এড করতে বাম পাশের <strong>Add Funds</strong> বাটনে ক্লিক করুন। এড করার পর আপনার ব্যালেন্স আপডেট হতে ৫-১০ মিনিট সময় নিতে পারে।
+            <form action="payment.php" method="POST">
+                <input type="hidden" name="amount_bdt" id="finalBDT">
+                <button type="submit" class="btn-submit">PLACE ORDER NOW (পেমেন্ট করুন)</button>
+            </form>
         </div>
     </div>
 
     <script>
         function calculate() {
-            const pricePer1k = parseFloat(document.getElementById('service').value);
-            const quantity = parseInt(document.getElementById('qty').value);
-            const display = document.getElementById('totalDisplay');
+            const rate = parseFloat(document.getElementById('service').value);
+            const qty = parseInt(document.getElementById('qty').value);
+            const exchangeRate = 130; // ১ ডলার = ১৩০ টাকা
 
-            if (quantity > 0) {
-                const total = (pricePer1k / 1000) * quantity;
-                display.innerText = "$" + total.toFixed(3);
+            if (qty > 0) {
+                const totalUSD = (rate / 1000) * qty;
+                const totalBDT = totalUSD * exchangeRate;
+
+                document.getElementById('usdPrice').innerText = "$" + totalUSD.toFixed(3) + " (USD)";
+                document.getElementById('bdtPrice').innerText = "৳" + totalBDT.toFixed(2) + " (BDT)";
+                document.getElementById('finalBDT').value = totalBDT.toFixed(2);
             } else {
-                display.innerText = "$0.000";
+                document.getElementById('usdPrice').innerText = "$0.000 (USD)";
+                document.getElementById('bdtPrice').innerText = "৳0.00 (BDT)";
             }
         }
     </script>
 </body>
 </html>
-<!-- index.html এর বাটন পরিবর্তন করুন -->
-<form action="payment.php" method="POST">
-    <input type="hidden" name="service_val" id="hiddenService">
-    <input type="hidden" name="total_amount" id="hiddenAmount">
-    <button type="submit" class="btn">PLACE ORDER NOW (পেমেন্ট করুন)</button>
-</form> 
-function calculate() {
-    const pricePer1kDollar = parseFloat(document.getElementById('service').value);
-    const quantity = parseInt(document.getElementById('qty').value);
-    const display = document.getElementById('totalDisplay');
-    const exchangeRate = 130; // ১ ডলার = ১৩০ টাকা
-
-    if (quantity > 0) {
-        const totalDollar = (pricePer1kDollar / 1000) * quantity;
-        const totalBDT = totalDollar * exchangeRate;
-        
-        // ডলারে কত এবং টাকায় কত দুইটাই দেখাবে
-        display.innerHTML = `
-            <div style="font-size: 18px; color: #FF8C00;">$${totalDollar.toFixed(3)} (USD)</div>
-            <div style="font-size: 16px; color: #00ff00;">৳${totalBDT.toFixed(2)} (BDT)</div>
-        `;
-    } else {
-        display.innerText = "$0.000 / ৳0.00";
-    }
-}
-<form action="payment.php" method="POST">
-    <input type="hidden" name="total_bdt" id="hidden_bdt">
-    <button type="submit" class="btn">PLACE ORDER NOW (পেমেন্ট করুন)</button>
-</form>
