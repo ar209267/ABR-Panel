@@ -2,88 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR Panel - Professional SMM Solution</title>
+    <title>Dashboard | ABR Panel</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dark-theme">
+<body>
 
     <nav class="navbar">
-        <div class="logo">ABR<span>Panel</span></div>
-        <div class="nav-right">
-            <span class="balance-btn">Balance: $0.00</span>
-            <div class="profile-img">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User">
+        <div class="logo" style="font-size:24px; font-weight:800; color:#2563eb;">ABR<span style="color:white;">Panel</span></div>
+        <div class="nav-right" style="display:flex; align-items:center;">
+            <div style="background:rgba(37,99,235,0.2); padding:8px 15px; border-radius:50px; border:1px solid #2563eb; margin-right:15px;">
+                Balance: $0.00
             </div>
+            <button onclick="window.location.href='login.html'" style="background:none; border:none; color:#94a3b8; cursor:pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Sidebar -->
+    <div class="wrapper">
         <aside class="sidebar">
-            <ul>
-                <li class="active"><i class="fas fa-shopping-cart"></i> New Order</li>
-                <li><i class="fas fa-list-alt"></i> Order History</li>
-                <li onclick="showSection('payment')"><i class="fas fa-wallet"></i> Add Funds</li>
-                <li><i class="fas fa-headset"></i> Support</li>
-                <li><i class="fas fa-user-shield"></i> Admin Panel</li>
+            <ul style="list-style:none;">
+                <li class="active" style="padding:15px; background:#2563eb; border-radius:12px; margin-bottom:10px; cursor:pointer;"><i class="fas fa-shopping-cart"></i> New Order</li>
+                <li style="padding:15px; color:#94a3b8; cursor:pointer;" onclick="alert('History is empty')"><i class="fas fa-history"></i> Order History</li>
+                <li style="padding:15px; color:#94a3b8; cursor:pointer;"><i class="fas fa-wallet"></i> Add Funds</li>
             </ul>
         </aside>
 
-        <!-- Main Content -->
-        <main class="content">
-            <section id="order-section">
-                <div class="card">
-                    <h2><i class="fas fa-plus-circle"></i> Create New Order</h2>
-                    <form id="orderForm">
-                        <label>Category</label>
-                        <select id="category">
-                            <option>Facebook Followers [BD]</option>
-                            <option>YouTube Subscribers [Non-Drop]</option>
-                            <option>Instagram Likes [Real]</option>
-                        </select>
-
-                        <label>Service</label>
-                        <select id="service">
-                            <option>Facebook Profile Followers - $1.20 per 1k</option>
-                        </select>
-
-                        <label>Link</label>
-                        <input type="url" placeholder="https://facebook.com/username" required>
-
-                        <label>Quantity</label>
-                        <input type="number" id="qty" placeholder="Min: 100 - Max: 5000" oninput="calcCharge()">
-
-                        <div class="charge-display">
-                            Total Charge: <span id="charge">$0.00</span>
-                        </div>
-
-                        <button type="submit" class="btn-primary">Submit Order</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Payment Section -->
-            <section id="payment-section" style="display:none;">
-                <div class="card payment-card">
-                    <h2><i class="fas fa-university"></i> Add Funds (Manual)</h2>
-                    <p class="notice">বিকাশ/নগদ/রকেট (Personal) নাম্বারে টাকা পাঠিয়ে ট্রানজেকশন আইডি দিন।</p>
-                    <div class="payment-methods">
-                        <div class="method"><strong>bKash:</strong> 01766380931</div>
-                        <div class="method"><strong>Nagad:</strong> 01766380931</div>
-                        <div class="method"><strong>Rocket:</strong> 01766380931</div>
-                    </div>
-                    <form id="payForm">
-                        <input type="text" placeholder="Amount (USD)" required>
-                        <input type="text" placeholder="Transaction ID (TRXID)" required>
-                        <button class="btn-primary">Verify Payment</button>
-                    </form>
-                </div>
-            </section>
+        <main class="main-content">
+            <div class="card-glass" style="max-width:700px; margin:0 auto;">
+                <h2>Create New Order</h2>
+                <form>
+                    <label>Category</label>
+                    <select><option>Facebook Followers [BD]</option></select>
+                    <label>Link</label>
+                    <input type="url" placeholder="https://facebook.com/..." required style="margin-bottom:15px;">
+                    <button class="btn-main">Submit Order</button>
+                </form>
+            </div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Floating WhatsApp Support Button -->
+    <a href="https://wa.me/8801766380931" target="_blank" style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; box-shadow:0 5px 15px rgba(0,0,0,0.3); text-decoration:none;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
 </body>
 </html> 
