@@ -115,4 +115,23 @@
     <input type="hidden" name="service_val" id="hiddenService">
     <input type="hidden" name="total_amount" id="hiddenAmount">
     <button type="submit" class="btn">PLACE ORDER NOW (পেমেন্ট করুন)</button>
-</form>
+</form> 
+function calculate() {
+    const pricePer1kDollar = parseFloat(document.getElementById('service').value);
+    const quantity = parseInt(document.getElementById('qty').value);
+    const display = document.getElementById('totalDisplay');
+    const exchangeRate = 130; // ১ ডলার = ১৩০ টাকা
+
+    if (quantity > 0) {
+        const totalDollar = (pricePer1kDollar / 1000) * quantity;
+        const totalBDT = totalDollar * exchangeRate;
+        
+        // ডলারে কত এবং টাকায় কত দুইটাই দেখাবে
+        display.innerHTML = `
+            <div style="font-size: 18px; color: #FF8C00;">$${totalDollar.toFixed(3)} (USD)</div>
+            <div style="font-size: 16px; color: #00ff00;">৳${totalBDT.toFixed(2)} (BDT)</div>
+        `;
+    } else {
+        display.innerText = "$0.000 / ৳0.00";
+    }
+}
