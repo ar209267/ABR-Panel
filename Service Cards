@@ -1,0 +1,7 @@
+<!-- index.html এর মেইন কন্টেন্ট সেকশনে এটি যোগ করুন -->
+<div class="service-icons-grid" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+    <div class="mini-card"><i class="fab fa-facebook" style="color: #1877f2;"></i> <span>FB</span></div>
+    <div class="mini-card"><i class="fab fa-tiktok" style="color: #000000;"></i> <span>TikTok</span></div>
+    <div class="mini-card"><i class="fab fa-whatsapp" style="color: #25d366;"></i> <span>WA</span></div>
+    <div class="mini-card"><i class="fab fa-instagram" style="color: #c13584;"></i> <span>IG</span></div>
+</div>
