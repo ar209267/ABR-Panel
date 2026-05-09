@@ -1,0 +1,85 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --primary-color: #ff8c00;
+    --text-color: #ffffff;
+    --secondary-text: #b3b3b3;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2196f3;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.order-form {
+    background: var(--card-bg);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    border-top: 5px solid var(--primary-color);
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+}
