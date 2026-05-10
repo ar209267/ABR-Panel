@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ABR ADMIN</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-3">
+
+<h3>ABR PANEL - Admin Orders</h3>
+
+<div id="orders"></div>
+
+<script>
+
+let data = JSON.parse(localStorage.getItem("orders")) || [];
+
+function load(){
+
+let box = document.getElementById("orders");
+box.innerHTML = "";
+
+data.forEach((o,i)=>{
+
+box.innerHTML += `
+<div class="card p-2 mb-2">
+<b>Number:</b> ${o.number}<br>
+<b>Amount:</b> ৳${o.amount}<br>
+<b>TRX:</b> ${o.trx}<br>
+<button onclick="approve(${i})" class="btn btn-success btn-sm mt-2">Approve</button>
+</div>
+`;
+
+});
+
+}
+
+function approve(i){
+
+let bal = localStorage.getItem("balance") || 0;
+bal = parseFloat(bal) + parseFloat(data[i].amount);
+
+localStorage.setItem("balance", bal);
+
+data.splice(i,1);
+localStorage.setItem("orders", JSON.stringify(data));
+
+load();
+
+alert("Approved!");
+
+}
+
+load();
+
+</script>
+
+</body>
+</html>
