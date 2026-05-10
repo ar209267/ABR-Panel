@@ -3,126 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR PRO SMM PANEL</title>
+    <title>ABR Panel - Professional SMM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background-color: #0f172a;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .main-container {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .card-custom {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        .form-control, .form-select {
-            background-color: #334155;
-            border: 1px solid #475569;
-            color: white;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: #334155;
-            color: white;
-            border-color: #3b82f6;
-            box-shadow: none;
-        }
-        .btn-whatsapp {
-            background-color: #25d366;
-            color: white;
-            border: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn-whatsapp:hover {
-            background-color: #1da851;
-            color: white;
-        }
+        body { background-color: #0d1117; color: white; font-family: 'Segoe UI', sans-serif; }
+        .navbar { background-color: #161b22; border-bottom: 1px solid #30363d; }
+        .main-card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .form-control, .form-select { background-color: #0d1117; border: 1px solid #30363d; color: white; padding: 12px; }
+        .form-control:focus { background-color: #0d1117; color: white; border-color: #58a6ff; box-shadow: none; }
+        
+        /* সার্ভিস আইকন গ্রিড */
+        .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .service-item { background: #21262d; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
+        .service-item:hover { border-color: #f78166; background: #30363d; }
+        .service-item i { font-size: 24px; margin-bottom: 8px; display: block; }
+        .ff-icon { color: #ff4d4d; } /* Free Fire Red */
+
+        .btn-submit { background-color: #f78166; border: none; padding: 12px; font-weight: bold; width: 100%; border-radius: 5px; color: white; }
+        .btn-submit:hover { background-color: #e06d52; }
+
+        /* পেমেন্ট সেকশন */
+        .payment-box { background: #21262d; border-radius: 10px; padding: 15px; margin-top: 20px; border-left: 5px solid #f78166; }
+        .footer-nav { position: fixed; bottom: 0; width: 100%; background: #161b22; display: flex; justify-content: space-around; padding: 10px; border-top: 1px solid #30363d; }
+        .footer-nav a { color: #8b949e; text-decoration: none; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="text-center mb-4">
-        <h2 class="fw-bold text-info">ABR PRO SMM PANEL</h2>
-        <p class="text-secondary small">আপনার সার্ভিস সিলেক্ট করুন</p>
+<nav class="navbar px-3">
+    <span class="navbar-brand text-white fw-bold"><i class="fas fa-fire ff-icon"></i> ABR SMM</span>
+    <div class="d-flex align-items-center">
+        <i class="fas fa-wallet me-2 text-warning"></i> <span>$0.00</span>
+    </div>
+</nav>
+
+<div class="container mb-5 pb-5">
+    <div class="service-grid mt-4">
+        <div class="service-item"><i class="fab fa-facebook text-primary"></i><span>FB</span></div>
+        <div class="service-item"><i class="fab fa-youtube text-danger"></i><span>YouTube</span></div>
+        <div class="service-item"><i class="fas fa-gamepad text-info"></i><span>Free Fire</span></div>
     </div>
 
-    <div class="card-custom">
-        <h5 class="mb-4 text-info">🛒 New Order</h5>
-        <form>
+    <div class="main-card">
+        <h6 class="text-secondary mb-3"><i class="fas fa-shopping-cart"></i> Create Order</h6>
+        <form id="orderForm">
             <div class="mb-3">
-                <label class="form-label">Category</label>
+                <label class="small text-secondary">Category</label>
                 <select class="form-select">
-                    <option>Select Service</option>
-                    <option>Facebook followers</option>
-                    <option>YouTube Watchtime</option>
-                    <option>Image Editing</option>
+                    <option>Free Fire Diamond Top-up</option>
+                    <option>Free Fire ID Sale</option>
+                    <option>Facebook Followers</option>
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Link</label>
-                <input type="text" class="form-control" placeholder="Paste your link here">
+                <label class="small text-secondary">Player ID / Link</label>
+                <input type="text" class="form-control" placeholder="Enter Player ID or Link">
             </div>
-            <div class="mb-4">
-                <label class="form-label">Quantity</label>
-                <input type="number" class="form-control" placeholder="100">
+            <div class="mb-3">
+                <label class="small text-secondary">Quantity</label>
+                <input type="number" class="form-control" placeholder="Minimum: 100">
             </div>
-            <button type="button" class="btn btn-primary w-100 fw-bold">PLACE ORDER</button>
+            
+            <div class="payment-box">
+                <span class="small text-secondary">Charge:</span>
+                <h5 class="text-warning">$0.00</h5>
+            </div>
+
+            <button type="submit" class="btn-submit mt-3">SUBMIT ORDER</button>
         </form>
     </div>
 
-    <div class="card-custom text-center" style="border: 1px solid #25d366;">
-        <h5 class="text-white mb-3">💬 সরাসরি যোগাযোগ ও পেমেন্ট</h5>
-        <p class="text-secondary small">যেকোনো কাস্টম অর্ডার বা পেমেন্ট সংক্রান্ত সহায়তার জন্য সরাসরি হোয়াটসঅ্যাপ করুন।</p>
-        
-        <div class="d-grid gap-2 mb-4">
-            <a href="https://wa.me/8801766380931" target="_blank" class="btn btn-whatsapp py-2">
-                Message on WhatsApp
-            </a>
-        </div>
-
-        <div class="p-3" style="background: #0f172a; border-radius: 10px; border: 1px dashed #3b82f6;">
-            <p class="mb-1 text-secondary small">Manual Payment (বিকাশ/নগদ)</p>
-            <h5 class="text-info">01766380931</h5>
-        </div>
+    <div class="mt-4 p-3 border border-secondary rounded small text-secondary">
+        <p class="text-warning fw-bold mb-1"><i class="fas fa-info-circle"></i> Please Note:</p>
+        * ভুল আইডি দিলে রিফান্ড হবে না। <br>
+        * অর্ডার ১০-৩০ মিনিটের মধ্যে কমপ্লিট হবে।
     </div>
-</div> <button type="button" class="btn btn-primary w-100 py-2 fw-bold">PLACE ORDER & PAY NOW</button>
-        </form>
-    </div> <div class="row justify-content-center mt-4">
-        <div class="col-md-12">
-            <div class="card-custom text-center" style="border: 2px solid #25d366; background-color: #1e293b; padding: 25px; border-radius: 15px;">
-                <h4 class="text-white mb-3">💬 সরাসরি যোগাযোগ ও পেমেন্ট</h4>
-                <p class="text-secondary small">যেকোনো কাস্টম অর্ডার বা পেমেন্ট সংক্রান্ত সহায়তার জন্য সরাসরি হোয়াটসঅ্যাপ করুন।</p>
-                
-                <div class="d-grid gap-2">
-                    <a href="https://wa.me/8801766380931" target="_blank" class="btn btn-success fw-bold py-3" style="background-color: #25d366; border: none;">
-                        Message on WhatsApp
-                    </a>
-                </div>
+</div>
 
-                <div class="mt-4 p-3" style="background: #0f172a; border-radius: 10px; border: 1px dashed #3b82f6;">
-                    <p class="mb-1 text-secondary">Manual Payment (বিকাশ/নগদ)</p>
-                    <h5 class="text-info">01766380931</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div> ```
-
-### **কিভাবে চেক করবেন ঠিক আছে কি না?**
-১. কোডটি পেস্ট করার পর ফাইলটি সেভ করুন।
-২. আপনার ব্রাউজারে সাইটটি রিফ্রেশ দিন।
-৩. যদি দেখেন "PLACE ORDER" বাটনের ঠিক নিচে সুন্দর একটি সবুজ বর্ডারওয়ালা বক্স চলে এসেছে এবং সেখানে আপনার নম্বর দেখা যাচ্ছে, তাহলে বুঝবেন কাজ হয়ে গেছে!
-
-আপনি কি এখন এটি বসাতে পেরেছেন? কোনো এরর দেখালে আমাকে স্ক্রিনশট দিতে পারেন।
+<div class="footer-nav">
+    <a href="#"><i class="fas fa-home d-block"></i> Home</a>
+    <a href="#"><i class="fas fa-list d-block"></i> Orders</a>
+    <a href="https://wa.me/8801766380931"><i class="fab fa-whatsapp d-block"></i> Support</a>
+    <a href="#"><i class="fas fa-user d-block"></i> Account</a>
+</div>
 
 </body>
 </html>
