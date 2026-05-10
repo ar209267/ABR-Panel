@@ -1,79 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SMM Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            background: #ffffff;
-        }
-        .btn-login {
-            background-color: #0d6efd;
-            color: white;
-            width: 100%;
-            font-weight: bold;
-            border-radius: 5px;
-            padding: 10px;
-            text-transform: uppercase;
-        }
-        .btn-login:hover {
-            background-color: #0b5ed7;
-            color: white;
-        }
-        .brand-logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+<title>AR Rocky FN Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="login-card">
-    <div class="brand-logo">
-        <h3 class="text-primary fw-bold">SMM PANEL</h3>
-        <p class="text-secondary">Please login to your account</p>
-    </div>
+<body class="p-3">
 
-    <form action="index.html" method="GET">
-        <div class="mb-3">
-            <label class="form-label">Username or Email</label>
-            <input type="text" class="form-control" placeholder="Enter your username" required>
-        </div>
+<h2 class="text-center text-primary">AR Rocky FN</h2>
 
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" placeholder="Enter password" required>
-        </div>
+<div class="card p-3">
 
-        <div class="d-flex justify-content-between mb-3">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="remember">
-                <label class="form-check-label" for="remember">Remember me</label>
-            </div>
-            <a href="#" class="text-decoration-none small">Forgot Password?</a>
-        </div>
+<h4>Login</h4>
 
-        <button type="submit" class="btn btn-login mb-3">Login Now</button>
+<input class="form-control mb-2" placeholder="Email">
 
-        <div class="text-center">
-            <p class="small mb-0">Don't have an account? <a href="#" class="text-decoration-none">Sign Up</a></p>
-        </div>
-    </form>
+<input class="form-control mb-2" type="password" placeholder="Password">
+
+<button class="btn btn-primary w-100">
+Login
+</button>
+
+<button onclick="googleLogin()" class="btn btn-danger w-100 mt-2">
+Login with Google
+</button>
+
 </div>
+
+<script type="module">
+
+import { getAuth, GoogleAuthProvider, signInWithPopup }
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import { app } from "./firebase.js";
+
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+window.googleLogin = function(){
+
+signInWithPopup(auth, provider)
+.then(()=>{
+window.location.href="index.html";
+})
+.catch(()=>{
+alert("Google Login Failed");
+});
+
+}
+
+</script>
 
 </body>
 </html>
