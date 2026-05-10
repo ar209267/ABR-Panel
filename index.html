@@ -4,81 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AR Rocky FN - Digital Services Panel</title>
+<title>AR Rocky FN - Services Panel</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
 
-/* ================= GLOBAL STYLE ================= */
-
 body{
-    background:#f3f6fb;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
     font-family:Segoe UI;
-    margin:0;
-    padding:0;
 }
 
-/* ================= BRAND ================= */
-
+/* HEADER */
 .header{
     text-align:center;
     padding:20px;
-    font-size:30px;
+    font-size:28px;
     font-weight:bold;
-    color:#0d6efd;
-    letter-spacing:2px;
+    color:#2563eb;
 }
 
 .header span{
-    color:#198754;
+    color:#16a34a;
 }
 
-/* ================= LOGIN BOX ================= */
-
-.login-container{
-    max-width:400px;
-    margin:auto;
-    margin-top:80px;
-}
-
-.box{
+/* CARD */
+.service-card{
     background:#fff;
-    padding:25px;
     border-radius:15px;
+    padding:15px;
+    margin-bottom:10px;
     box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* ================= DASHBOARD ================= */
-
-#dashboard{
-    display:none;
-    padding:15px;
-}
-
-.card-service{
-    background:#fff;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:12px;
     cursor:pointer;
     transition:0.3s;
-    border-left:4px solid #0d6efd;
 }
 
-.card-service:hover{
-    transform:scale(1.02);
+.service-card:hover{
+    transform:translateY(-3px);
 }
 
-/* ================= ORDER BOX ================= */
-
-#orderBox{
+/* ORDER BOX */
+#order{
     display:none;
     background:#fff;
-    padding:20px;
-    border-radius:12px;
+    padding:15px;
+    border-radius:15px;
     margin-top:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* BALANCE */
+.balance{
+    text-align:center;
+    font-weight:bold;
+    color:#16a34a;
+    margin-bottom:15px;
+}
+
+.btn-main{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
 }
 
 </style>
@@ -87,70 +75,55 @@ body{
 
 <body>
 
-<!-- ================= BRAND ================= -->
+<!-- HEADER -->
 <div class="header">
     AR <span>Rocky FN</span>
 </div>
 
-<!-- ================= LOGIN PAGE ================= -->
-<div id="loginPage" class="login-container">
-
-<div class="box">
-
-<h4 class="text-center mb-3">LOGIN PANEL</h4>
-
-<input id="email" class="form-control mb-2" placeholder="Enter Gmail Address">
-
-<input id="password" type="password" class="form-control mb-2" placeholder="Password (min 8 digit)">
-
-<button class="btn btn-primary w-100" onclick="loginUser()">
-Login
-</button>
-
+<!-- BALANCE -->
+<div class="balance">
+Balance: ৳<span id="bal">0</span>
 </div>
 
-</div>
+<!-- SERVICES -->
+<div class="container">
 
-<!-- ================= DASHBOARD ================= -->
-<div id="dashboard">
-
-<h5>Welcome to AR Rocky FN Services</h5>
-
-<h6>Balance: ৳<span id="balance">0</span></h6>
-
-<div class="card-service" onclick="openService('facebook')">
+<div class="service-card" onclick="openService('fb')">
 📘 Facebook Marketing Services
 </div>
 
-<div class="card-service" onclick="openService('youtube')">
-▶️ YouTube Growth Services
-</div>
-
-<div class="card-service" onclick="openService('instagram')">
+<div class="service-card" onclick="openService('ig')">
 📸 Instagram Promotion Services
 </div>
 
-<div class="card-service" onclick="openService('tiktok')">
+<div class="service-card" onclick="openService('yt')">
+▶️ YouTube Growth Services
+</div>
+
+<div class="service-card" onclick="openService('tt')">
 🎵 TikTok Promotion Services
 </div>
 
-<div class="card-service" onclick="logoutUser()">
-🚪 Logout
+<div class="service-card" onclick="window.location.href='profile.html'">
+👤 Profile / Wallet
 </div>
 
-<!-- ================= ORDER BOX ================= -->
-<div id="orderBox">
+<!-- ORDER -->
+<div id="order">
 
-<h5 id="serviceTitle"></h5>
+<h5 id="title"></h5>
 
-<select id="serviceList" class="form-select mb-2" onchange="calculatePrice()"></select>
+<select id="service" class="form-select mb-2" onchange="calc()"></select>
 
-<input id="quantity" class="form-control mb-2" value="1000" oninput="calculatePrice()">
+<input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
 
-<h5>Total Cost: $<span id="totalPrice">0</span></h5>
+<div class="p-2 bg-light rounded text-center mb-2">
+Total: $<span id="total">0</span>
+</div>
 
-<button class="btn btn-warning w-100">
-Place Order
+<button class="btn btn-warning btn-main"
+onclick="window.location.href='profile.html'">
+PLACE ORDER
 </button>
 
 </div>
@@ -159,120 +132,74 @@ Place Order
 
 <script>
 
-/* ================= AUTO LOGIN CHECK ================= */
-
-window.onload=function(){
-if(localStorage.getItem("login")=="true"){
-showDashboard();
-}
-document.getElementById("balance").innerText =
+// BALANCE
+document.getElementById("bal").innerText =
 localStorage.getItem("balance") || 0;
-}
 
-/* ================= LOGIN SYSTEM ================= */
+// DATA
+const data = {
 
-function loginUser(){
-
-let email=document.getElementById("email").value;
-let pass=document.getElementById("password").value;
-
-if(!email.includes("@gmail.com")){
-alert("Valid Gmail required");
-return;
-}
-
-if(pass.length<8){
-alert("Password must be at least 8 characters");
-return;
-}
-
-localStorage.setItem("login","true");
-localStorage.setItem("user",email);
-
-showDashboard();
-
-}
-
-/* ================= SHOW DASHBOARD ================= */
-
-function showDashboard(){
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("dashboard").style.display="block";
-
-}
-
-/* ================= LOGOUT ================= */
-
-function logoutUser(){
-localStorage.removeItem("login");
-location.reload();
-}
-
-/* ================= SERVICE DATA ================= */
-
-const services={
-facebook:{
+fb:{
 title:"Facebook Services",
 items:[
-{name:"Page Promotion",price:1.2},
-{name:"Post Boost",price:0.8}
+{name:"Page Promotion",price:1.5},
+{name:"Post Engagement",price:0.8}
 ]
 },
-youtube:{
-title:"YouTube Services",
-items:[
-{name:"Video Promotion",price:2},
-{name:"Channel Growth",price:3}
-]
-},
-instagram:{
+
+ig:{
 title:"Instagram Services",
 items:[
-{name:"Profile Promotion",price:1},
-{name:"Post Reach Boost",price:0.7}
+{name:"Profile Growth",price:1.2},
+{name:"Content Boost",price:0.9}
 ]
 },
-tiktok:{
+
+yt:{
+title:"YouTube Services",
+items:[
+{name:"Channel Promotion",price:2},
+{name:"Video Boost",price:1.5}
+]
+},
+
+tt:{
 title:"TikTok Services",
 items:[
-{name:"Video Views",price:1.5},
-{name:"Account Growth",price:2}
+{name:"Video Promotion",price:1},
+{name:"Account Growth",price:1.8}
 ]
 }
+
 };
 
-/* ================= OPEN SERVICE ================= */
+function openService(key){
 
-function openService(type){
+let s=data[key];
 
-let data=services[type];
+document.getElementById("order").style.display="block";
+document.getElementById("title").innerText=s.title;
 
-document.getElementById("orderBox").style.display="block";
-document.getElementById("serviceTitle").innerText=data.title;
+let sel=document.getElementById("service");
+sel.innerHTML="";
 
-let select=document.getElementById("serviceList");
-select.innerHTML="";
-
-data.items.forEach(item=>{
+s.items.forEach(i=>{
 let opt=document.createElement("option");
-opt.value=item.price;
-opt.text=item.name;
-select.appendChild(opt);
+opt.value=i.price;
+opt.text=i.name;
+sel.appendChild(opt);
 });
 
-calculatePrice();
+calc();
 
 }
 
-/* ================= PRICE CALC ================= */
+function calc(){
 
-function calculatePrice(){
+let price=document.getElementById("service").value;
+let qty=document.getElementById("qty").value;
 
-let price=document.getElementById("serviceList").value;
-let qty=document.getElementById("quantity").value;
-
-document.getElementById("totalPrice").innerText =
+document.getElementById("total").innerText =
 (price*qty/1000).toFixed(2);
 
 }
