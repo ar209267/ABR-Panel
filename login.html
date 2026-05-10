@@ -2,29 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login | ABR Panel</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SMM Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #ffffff;
+        }
+        .btn-login {
+            background-color: #0d6efd;
+            color: white;
+            width: 100%;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 10px;
+            text-transform: uppercase;
+        }
+        .btn-login:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="card-glass">
-        <div class="auth-header">
-            <h1>ABR<span>Panel</span></h1>
-            <p>Welcome back! Please login.</p>
-        </div>
-        <form onsubmit="event.preventDefault(); window.location.href='index.html';">
-            <div class="form-group">
-                <label>Email or Username</label>
-                <input type="text" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn-main">Login to Dashboard</button>
-        </form>
-        <div class="auth-footer">
-            Don't have an account? <a href="signup.html">Sign Up</a>
-        </div>
+
+<div class="login-card">
+    <div class="brand-logo">
+        <h3 class="text-primary fw-bold">SMM PANEL</h3>
+        <p class="text-secondary">Please login to your account</p>
     </div>
+
+    <form action="index.html" method="GET">
+        <div class="mb-3">
+            <label class="form-label">Username or Email</label>
+            <input type="text" class="form-control" placeholder="Enter your username" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Enter password" required>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <a href="#" class="text-decoration-none small">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-login mb-3">Login Now</button>
+
+        <div class="text-center">
+            <p class="small mb-0">Don't have an account? <a href="#" class="text-decoration-none">Sign Up</a></p>
+        </div>
+    </form>
+</div>
+
 </body>
-</html> 
+</html>
