@@ -1,142 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AR Rocky FN Panel</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<script type="module" src="app.js"></script>
-
-<style>
-body{font-family:Segoe UI;background:#f4f6fb}
-.box{background:#fff;padding:15px;border-radius:12px;margin:10px}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h3 class="text-center text-primary mt-3">AR Rocky FN</h3>
-
-<!-- LOGIN -->
-<div id="loginBox" class="box text-center">
-
-<h5>Login with Google</h5>
-<button onclick="googleLogin()" class="btn btn-danger w-100">
-Login
-</button>
-
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" style="display:none">
-
-<h5>Welcome</h5>
-
-<a href="wallet.html" class="btn btn-success w-100 mb-2">Wallet</a>
-<a href="orders.html" class="btn btn-dark w-100 mb-2">Orders</a>
-<a href="profile.html" class="btn btn-primary w-100 mb-3">Profile</a>
-
-<div class="box" onclick="openService('fb')">📘 Facebook Services</div>
-<div class="box" onclick="openService('ig')">📸 Instagram Services</div>
-<div class="box" onclick="openService('yt')">▶️ YouTube Services</div>
-<div class="box" onclick="openService('tt')">🎵 TikTok Services</div>
-
-<!-- ORDER -->
-<div id="orderBox" class="box" style="display:none">
-
-<h5 id="title"></h5>
-
-<select id="service" class="form-select mb-2"></select>
-
-<input id="qty" class="form-control mb-2" value="1000">
-
-<h5>Total: $<span id="total">0</span></h5>
-
-<button class="btn btn-warning w-100" onclick="placeOrder()">
-Place Order
-</button>
-
-</div>
-
-</div>
-
-</div>
+<title>AR Rocky FN Login</title>
 
 <script type="module">
 
-import { auth, db } from "./app.js";
-import { signInWithPopup, GoogleAuthProvider } 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import { collection, addDoc } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-let data={
-fb:{title:"Facebook",items:[{n:"Likes",p:1},{n:"Followers",p:2}]},
-ig:{title:"Instagram",items:[{n:"Followers",p:2},{n:"Likes",p:1.5}]},
-yt:{title:"YouTube",items:[{n:"Views",p:1.8},{n:"Subs",p:5}]},
-tt:{title:"TikTok",items:[{n:"Views",p:1.2},{n:"Followers",p:2.5}]}
+const firebaseConfig = {
+apiKey: "YOUR_API_KEY",
+authDomain: "YOUR_AUTH_DOMAIN",
+projectId: "YOUR_PROJECT_ID",
+appId: "YOUR_APP_ID"
 };
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 window.googleLogin = function(){
 
 const provider = new GoogleAuthProvider();
 
-signInWithPopup(auth, provider).then(()=>{
-document.getElementById("loginBox").style.display="none";
-document.getElementById("dashboard").style.display="block";
+signInWithPopup(auth, provider)
+.then((result)=>{
+
+localStorage.setItem("user", JSON.stringify(result.user));
+
+alert("Login Success!");
+
+window.location.href = "dashboard.html";
+
+})
+.catch((error)=>{
+alert("Login Failed: " + error.message);
 });
 
-}
-
-window.openService=function(key){
-
-let s=data[key];
-
-document.getElementById("orderBox").style.display="block";
-document.getElementById("title").innerText=s.title;
-
-let sel=document.getElementById("service");
-sel.innerHTML="";
-
-s.items.forEach(i=>{
-let opt=document.createElement("option");
-opt.value=i.p;
-opt.text=i.n;
-sel.appendChild(opt);
-});
-
-calc();
-
-}
-
-window.calc=function(){
-
-let p=document.getElementById("service").value;
-let q=document.getElementById("qty").value;
-
-document.getElementById("total").innerText=(p*q/1000).toFixed(2);
-
-}
-
-window.placeOrder = async function(){
-
-let user = auth.currentUser;
-
-await addDoc(collection(db,"orders"),{
-uid:user.uid,
-service:document.getElementById("service").selectedOptions[0].text,
-qty:document.getElementById("qty").value,
-price:document.getElementById("total").innerText,
-date:new Date().toISOString()
-});
-
-alert("Order Placed!");
 }
 
 </script>
+
+</head>
+
+<body style="font-family:Segoe UI;text-align:center;margin-top:100px">
+
+<h2>AR Rocky FN</h2>
+
+<button onclick="googleLogin()" style="
+padding:15px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+">
+Login with Google
+</button>
 
 </body>
 </html>
