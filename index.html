@@ -1,105 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AR Rocky FN - Digital Services</title>
+<title>AR Rocky FN Panel</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<script type="module" src="app.js"></script>
+
 <style>
-
-body{
-    background:#f4f6fb;
-    font-family:Segoe UI;
-}
-
-.brand{
-    text-align:center;
-    padding:15px;
-    font-size:26px;
-    font-weight:bold;
-    color:#0d6efd;
-}
-
-.brand span{
-    color:#198754;
-}
-
-.card-box{
-    background:#fff;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.card-box:hover{
-    transform:scale(1.02);
-}
-
-#order{
-    display:none;
-    background:#fff;
-    padding:15px;
-    border-radius:12px;
-    margin-top:15px;
-}
-
+body{font-family:Segoe UI;background:#f4f6fb}
+.box{background:#fff;padding:15px;border-radius:12px;margin:10px}
 </style>
-
 </head>
 
 <body>
 
-<!-- BRAND -->
-<div class="brand">
-    AR <span>Rocky FN</span>
-</div>
-
-<!-- BALANCE -->
-<h5 class="text-center">
-Balance: ৳<span id="bal">0</span>
-</h5>
-
-<!-- SERVICES -->
 <div class="container">
 
-<div class="card-box" onclick="openService('fb')">
-📘 Facebook Marketing Services
+<h3 class="text-center text-primary mt-3">AR Rocky FN</h3>
+
+<!-- LOGIN -->
+<div id="loginBox" class="box text-center">
+
+<h5>Login with Google</h5>
+<button onclick="googleLogin()" class="btn btn-danger w-100">
+Login
+</button>
+
 </div>
 
-<div class="card-box" onclick="openService('ig')">
-📸 Instagram Promotion Services
-</div>
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
 
-<div class="card-box" onclick="openService('yt')">
-▶️ YouTube Channel Services
-</div>
+<h5>Welcome</h5>
 
-<div class="card-box" onclick="openService('tt')">
-🎵 TikTok Promotion Services
-</div>
+<a href="wallet.html" class="btn btn-success w-100 mb-2">Wallet</a>
+<a href="orders.html" class="btn btn-dark w-100 mb-2">Orders</a>
+<a href="profile.html" class="btn btn-primary w-100 mb-3">Profile</a>
 
-<div class="card-box" onclick="window.location.href='profile.html'">
-👤 Profile / Wallet
-</div>
+<div class="box" onclick="openService('fb')">📘 Facebook Services</div>
+<div class="box" onclick="openService('ig')">📸 Instagram Services</div>
+<div class="box" onclick="openService('yt')">▶️ YouTube Services</div>
+<div class="box" onclick="openService('tt')">🎵 TikTok Services</div>
 
-<!-- ORDER BOX -->
-<div id="order">
+<!-- ORDER -->
+<div id="orderBox" class="box" style="display:none">
 
 <h5 id="title"></h5>
 
-<select id="service" class="form-select mb-2" onchange="calc()"></select>
+<select id="service" class="form-select mb-2"></select>
 
-<input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
+<input id="qty" class="form-control mb-2" value="1000">
 
-<h5>Total Cost: $<span id="total">0</span></h5>
+<h5>Total: $<span id="total">0</span></h5>
 
-<button class="btn btn-warning w-100"
-onclick="window.location.href='profile.html'">
+<button class="btn btn-warning w-100" onclick="placeOrder()">
 Place Order
 </button>
 
@@ -107,54 +62,40 @@ Place Order
 
 </div>
 
-<script>
+</div>
 
-// BALANCE
-document.getElementById("bal").innerText =
-localStorage.getItem("balance") || 0;
+<script type="module">
 
-// SAFE SERVICE DATA
-const data = {
+import { auth, db } from "./app.js";
+import { signInWithPopup, GoogleAuthProvider } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-fb:{
-title:"Facebook Marketing Services",
-items:[
-{name:"Page Promotion Campaign",price:1.5},
-{name:"Post Engagement Campaign",price:0.8}
-]
-},
+import { collection, addDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-ig:{
-title:"Instagram Services",
-items:[
-{name:"Profile Promotion",price:1.2},
-{name:"Content Boost Campaign",price:0.9}
-]
-},
-
-yt:{
-title:"YouTube Services",
-items:[
-{name:"Channel Growth Support",price:2},
-{name:"Video Promotion Campaign",price:1.5}
-]
-},
-
-tt:{
-title:"TikTok Services",
-items:[
-{name:"Video Promotion",price:1},
-{name:"Account Growth Support",price:1.8}
-]
-}
-
+let data={
+fb:{title:"Facebook",items:[{n:"Likes",p:1},{n:"Followers",p:2}]},
+ig:{title:"Instagram",items:[{n:"Followers",p:2},{n:"Likes",p:1.5}]},
+yt:{title:"YouTube",items:[{n:"Views",p:1.8},{n:"Subs",p:5}]},
+tt:{title:"TikTok",items:[{n:"Views",p:1.2},{n:"Followers",p:2.5}]}
 };
 
-function openService(key){
+window.googleLogin = function(){
+
+const provider = new GoogleAuthProvider();
+
+signInWithPopup(auth, provider).then(()=>{
+document.getElementById("loginBox").style.display="none";
+document.getElementById("dashboard").style.display="block";
+});
+
+}
+
+window.openService=function(key){
 
 let s=data[key];
 
-document.getElementById("order").style.display="block";
+document.getElementById("orderBox").style.display="block";
 document.getElementById("title").innerText=s.title;
 
 let sel=document.getElementById("service");
@@ -162,8 +103,8 @@ sel.innerHTML="";
 
 s.items.forEach(i=>{
 let opt=document.createElement("option");
-opt.value=i.price;
-opt.text=i.name;
+opt.value=i.p;
+opt.text=i.n;
 sel.appendChild(opt);
 });
 
@@ -171,17 +112,31 @@ calc();
 
 }
 
-function calc(){
+window.calc=function(){
 
-let price=document.getElementById("service").value;
-let qty=document.getElementById("qty").value;
+let p=document.getElementById("service").value;
+let q=document.getElementById("qty").value;
 
-document.getElementById("total").innerText =
-(price*qty/1000).toFixed(2);
+document.getElementById("total").innerText=(p*q/1000).toFixed(2);
 
+}
+
+window.placeOrder = async function(){
+
+let user = auth.currentUser;
+
+await addDoc(collection(db,"orders"),{
+uid:user.uid,
+service:document.getElementById("service").selectedOptions[0].text,
+qty:document.getElementById("qty").value,
+price:document.getElementById("total").innerText,
+date:new Date().toISOString()
+});
+
+alert("Order Placed!");
 }
 
 </script>
 
 </body>
-</html> 
+</html>
