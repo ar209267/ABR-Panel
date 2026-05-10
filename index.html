@@ -1,108 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABR PRO | Premium SMM Panel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        :root { --primary: #FF8C00; --bg: #0B0E14; --card: #161B22; --text: #E6EDF3; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; }
-        .sidebar { width: 250px; height: 100vh; background: var(--card); padding: 20px; position: fixed; border-right: 1px solid #30363d; }
-        .nav-item { padding: 12px; display: block; color: #8b949e; text-decoration: none; border-radius: 8px; margin-bottom: 10px; transition: 0.3s; }
-        .nav-item.active { background: rgba(255, 140, 0, 0.1); color: var(--primary); }
-        .main-content { margin-left: 250px; padding: 40px; width: 100%; }
-        .order-box { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid #30363d; max-width: 600px; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 20px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 8px; }
-        .price-display { background: #1c2128; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; border: 1px dashed var(--primary); }
-        .btn-submit { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .order-card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        .form-control, .form-select {
+            background-color: #0f172a !important;
+            border: 1px solid #475569 !important;
+            color: #fff !important;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: #f59e0b !important;
+            box-shadow: none;
+        }
+
+        .charge-box {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px dashed #475569;
+        }
+
+        .btn-order {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            color: white;
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2 style="color: var(--primary);">ABR PRO</h2>
-        <a href="#" class="nav-item active"><i class="fas fa-plus-circle"></i> New Order</a>
-        <a href="payment.php" class="nav-item"><i class="fas fa-wallet"></i> Add Funds (টাকা জমা)</a>
-        <a href="admin.html" class="nav-item"><i class="fas fa-user-shield"></i> Admin Panel</a>
-        <div style="margin-top: 50px;">
-            <a href="login.html" class="nav-item"><i class="fas fa-sign-in-alt"></i> Login</a>
-            <a href="signup.html" class="nav-item"><i class="fas fa-user-plus"></i> Sign Up</a>
-        </div>
-    </div>
+<div class="container">
+    <div class="order-card">
+        <h3 class="text-center mb-4" style="color: #f59e0b;">🔥 ABR PRO PANEL</h3>
+        
+        <label class="form-label">Category</label>
+        <select id="mainCategory" class="form-select" onchange="filterServices()">
+            <option value="">Select Category</option>
+            <option value="fb">Facebook Services</option>
+            <option value="yt">YouTube Services</option>
+            <option value="tk">TikTok Services</option>
+        </select>
 
-    <div class="main-content">
-        <div class="order-box">
-            <h3><i class="fas fa-shopping-cart"></i> Create Order</h3>
-            
-            <label>Platform & Service</label>
-            <select id="service" onchange="calculate()">
-                <optgroup label="Facebook">
-                    <option value="0.20">FB Followers (Mix) - $0.20/1k</option>
-                    <option value="1.50">FB Followers (Real) - $1.50/1k</option>
-                </optgroup>
-                <optgroup label="TikTok">
-                    <option value="0.05">TikTok Views - $0.05/1k</option>
-                    <option value="0.80">TikTok Followers - $0.80/1k</option>
-                </optgroup>
-                <optgroup label="Others">
-                    <option value="2.50">YouTube Subscribers - $2.50/1k</option>
-                    <option value="0.40">Instagram Followers - $0.40/1k</option>
-                </optgroup>
-            </select>
+        <label class="form-label">Service</label>
+        <select id="serviceList" class="form-select" onchange="calculateTotal()">
+            <option value="0">Select Service First</option>
+        </select>
 
-            <label>Link</label>
-            <input type="text" id="link" placeholder="https://social.com/profile">
+        <label class="form-label">Link</label>
+        <input type="text" class="form-control" placeholder="https://example.com/profile">
 
-            <label>Quantity</label>
-            <input type="number" id="qty" placeholder="e.g. 1000" oninput="calculate()">
+        <label class="form-label">Quantity</label>
+        <input type="number" id="quantity" class="form-control" placeholder="Min: 100 - Max: 10000" oninput="calculateTotal()">
 
-            <div class="price-display" id="priceBox">
-                <div style="color: var(--primary); font-size: 20px; font-weight: bold;" id="usdPrice">$0.000 (USD)</div>
-                <div style="color: #00ff00; font-size: 16px;" id="bdtPrice">৳0.00 (BDT)</div>
+        <div class="charge-box d-flex justify-content-between">
+            <div>
+                <small class="d-block text-secondary">Charge (USD)</small>
+                <strong id="chargeUSD" class="text-warning fs-5">$0.000</strong>
             </div>
-
-            <form action="payment.php" method="POST">
-                <input type="hidden" name="amount_bdt" id="finalBDT">
-                <button type="submit" class="btn-submit">PLACE ORDER NOW (পেমেন্ট করুন)</button>
-            </form>
+            <div class="text-end">
+                <small class="d-block text-secondary">Charge (BDT)</small>
+                <strong id="chargeBDT" class="text-success fs-5">৳0.00</strong>
+            </div>
         </div>
+
+        <button class="btn btn-order w-100" onclick="alert('Proceeding to Payment...')">PLACE ORDER NOW</button>
     </div>
+</div>
 
-    <script>
-        function calculate() {
-            const rate = parseFloat(document.getElementById('service').value);
-            const qty = parseInt(document.getElementById('qty').value);
-            const exchangeRate = 130; // ১ ডলার = ১৩০ টাকা
+<script>
+    // সার্ভিস ডাটাবেস
+    const services = {
+        'fb': [
+            {name: 'FB Followers (Real) - $1.50/1k', price: 1.50},
+            {name: 'FB Likes (Instant) - $0.50/1k', price: 0.50}
+        ],
+        'yt': [
+            {name: 'YT Subscribers - $2.50/1k', price: 2.50},
+            {name: 'YT Views - $1.20/1k', price: 1.20}
+        ],
+        'tk': [
+            {name: 'TikTok Followers - $0.80/1k', price: 0.80},
+            {name: 'TikTok Views - $0.05/1k', price: 0.05}
+        ]
+    };
 
-            if (qty > 0) {
-                const totalUSD = (rate / 1000) * qty;
-                const totalBDT = totalUSD * exchangeRate;
+    const BDT_RATE = 130; // ১ ডলার = ১৩০ টাকা
 
-                document.getElementById('usdPrice').innerText = "$" + totalUSD.toFixed(3) + " (USD)";
-                document.getElementById('bdtPrice').innerText = "৳" + totalBDT.toFixed(2) + " (BDT)";
-                document.getElementById('finalBDT').value = totalBDT.toFixed(2);
-            } else {
-                document.getElementById('usdPrice').innerText = "$0.000 (USD)";
-                document.getElementById('bdtPrice').innerText = "৳0.00 (BDT)";
-            }
+    function filterServices() {
+        const cat = document.getElementById('mainCategory').value;
+        const list = document.getElementById('serviceList');
+        list.innerHTML = '<option value="0">Select Service</option>';
+        
+        if(services[cat]) {
+            services[cat].forEach(s => {
+                let option = document.createElement('option');
+                option.text = s.name;
+                option.value = s.price;
+                list.add(option);
+            });
         }
-    </script>
+        calculateTotal(); // রিসেট করার জন্য
+    }
+
+    function calculateTotal() {
+        const pricePerK = document.getElementById('serviceList').value;
+        const qty = document.getElementById('quantity').value;
+        
+        if(pricePerK > 0 && qty > 0) {
+            const totalUSD = (pricePerK * qty) / 1000;
+            const totalBDT = totalUSD * BDT_RATE;
+            
+            document.getElementById('chargeUSD').innerText = '$' + totalUSD.toFixed(3);
+            document.getElementById('chargeBDT').innerText = '৳' + totalBDT.toFixed(2);
+        } else {
+            document.getElementById('chargeUSD').innerText = '$0.000';
+            document.getElementById('chargeBDT').innerText = '৳0.00';
+        }
+    }
+</script>
+
 </body>
-</html> 
-<h3 id="status">Connecting...</h3>
-<script src="config.js"></script>
-<script src="script.js"></script>
-<body>
-
-<!-- তোমার আগের UI থাকবে এখানে -->
-
-<h1>🔥 ABR PANEL</h1>
-
-<!-- নতুন অংশ এখানে যোগ করো -->
-<h3 id="status">Connecting...</h3>
-
-<script src="config.js"></script>
-<script src="script.js"></script>
-
-</body>
+</html>
