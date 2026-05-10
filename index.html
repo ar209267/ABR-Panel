@@ -7,19 +7,13 @@
 
 <body class="p-3">
 
-<div class="text-center mb-3">
-<h3 class="fw-bold text-primary">AR Rocky FN</h3>
-</div>
+<h3 class="text-center text-primary">AR Rocky FN</h3>
 
-<!-- BALANCE -->
 <h5>Balance: ৳<span id="bal">0</span></h5>
 
-<!-- SERVICES -->
 <div class="card p-3 mb-2" onclick="openService('fb')">Facebook</div>
 <div class="card p-3 mb-2" onclick="openService('yt')">YouTube</div>
-<div class="card p-3 mb-2" onclick="window.location.href='profile.html'">Profile</div>
 
-<!-- ORDER -->
 <div id="order" class="card p-3 mt-3" style="display:none">
 
 <h5 id="title"></h5>
@@ -32,31 +26,25 @@
 
 <button class="btn btn-warning w-100"
 onclick="window.location.href='profile.html'">
-PLACE ORDER
+Place Order
 </button>
 
 </div>
 
 <script>
 
-// LOAD BALANCE
 function loadBal(){
 document.getElementById("bal").innerText =
 localStorage.getItem("balance") || 0;
 }
 loadBal();
 
-// DATA
 const data={
-fb:{
-title:"Facebook",
-items:[
+fb:{title:"Facebook",items:[
 {name:"Followers",price:1.2},
 {name:"Likes",price:0.5}
 ]},
-yt:{
-title:"YouTube",
-items:[
+yt:{title:"YouTube",items:[
 {name:"Views",price:2},
 {name:"Subs",price:5}
 ]}
@@ -85,7 +73,7 @@ function calc(){
 let p=document.getElementById("service").value;
 let q=document.getElementById("qty").value;
 
-document.getElementById("total").innerText=
+document.getElementById("total").innerText =
 (p*q/1000).toFixed(2);
 }
 
