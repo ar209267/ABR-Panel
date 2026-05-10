@@ -1,0 +1,6 @@
+ABR-PANEL/
+│
+├── index.html        (Main Dashboard)
+├── profile.html      (Wallet Page)
+├── add-funds.html    (Payment Page)
+└── server.js         (Stripe backend - optional)
