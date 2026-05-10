@@ -7,18 +7,15 @@
 
 <body class="p-3">
 
-<div class="card p-3">
-
-<h3>Add Funds</h3>
+<h3>AR Rocky FN - Add Funds</h3>
 
 <h5>Bkash: +8801766380931</h5>
 
-<input class="form-control mb-2" placeholder="Number">
-<input id="amount" class="form-control mb-2" placeholder="Amount">
-<input class="form-control mb-2" placeholder="TrxID">
+<input id="amt" class="form-control mb-2" placeholder="Amount">
+<input class="form-control mb-2" placeholder="Transaction ID">
 
 <button class="btn btn-success w-100" onclick="addBal()">
-Submit
+Submit Payment
 </button>
 
 <button class="btn btn-dark w-100 mt-2"
@@ -26,20 +23,23 @@ onclick="window.location.href='profile.html'">
 Back
 </button>
 
-</div>
-
 <script>
 
 function addBal(){
 
-let amt=document.getElementById("amount").value;
+let amt=document.getElementById("amt").value;
+
+if(!amt || amt<=0){
+alert("Invalid Amount");
+return;
+}
 
 let current=localStorage.getItem("balance") || 0;
 
 localStorage.setItem("balance",
 parseFloat(current)+parseFloat(amt));
 
-alert("Added!");
+alert("Balance Added!");
 
 window.location.href="profile.html";
 
