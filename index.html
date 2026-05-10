@@ -4,49 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AR Rocky FN Panel</title>
+<title>AR Rocky BD - Panel</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 
 body{
-    background:#f0f2f5;
+    background:#eef2f7;
     font-family:Segoe UI;
 }
 
-#dashboard{display:none;padding:20px}
-
-.login-card{
+/* LOGIN */
+.login-box{
     max-width:400px;
     margin:auto;
     margin-top:120px;
     background:#fff;
-    padding:20px;
+    padding:25px;
     border-radius:12px;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.service-card{
+/* DASHBOARD */
+#dashboard{display:none;padding:20px}
+
+.header{
+    text-align:center;
+    font-weight:bold;
+    font-size:22px;
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+.card-box{
     background:#fff;
     padding:15px;
-    border-radius:10px;
+    border-radius:12px;
     text-align:center;
     cursor:pointer;
     transition:0.2s;
+    margin-bottom:10px;
 }
 
-.service-card:hover{
+.card-box:hover{
     transform:scale(1.03);
 }
 
-#order-box{
+/* ORDER */
+#order{
     display:none;
     background:#fff;
     padding:15px;
     border-radius:12px;
     margin-top:15px;
+}
+
+.total{
+    font-weight:bold;
+    color:#198754;
 }
 
 </style>
@@ -56,7 +72,7 @@ body{
 <body>
 
 <!-- LOGIN -->
-<div id="login-page" class="login-card">
+<div id="login" class="login-box">
 
 <h3 class="text-center text-primary">LOGIN</h3>
 
@@ -72,38 +88,17 @@ Login
 <!-- DASHBOARD -->
 <div id="dashboard">
 
-<h4>AR Rocky FN Panel</h4>
-
-<div class="row g-2">
-
-<div class="col-6">
-<div class="service-card" onclick="openService('fb')">
-Facebook
-</div>
+<div class="header">
+AR Rocky FN PANEL
 </div>
 
-<div class="col-6">
-<div class="service-card" onclick="openService('yt')">
-YouTube
-</div>
-</div>
-
-<div class="col-6 mt-2">
-<div class="service-card" onclick="openService('ff')">
-Free Fire
-</div>
-</div>
-
-<div class="col-6 mt-2">
-<div class="service-card" onclick="openService('id')">
-ID Sale
-</div>
-</div>
-
-</div>
+<div class="card-box" onclick="openService('fb')">Facebook Services</div>
+<div class="card-box" onclick="openService('yt')">YouTube Services</div>
+<div class="card-box" onclick="openService('ff')">Free Fire Services</div>
+<div class="card-box" onclick="openService('id')">ID Sale Services</div>
 
 <!-- ORDER -->
-<div id="order-box">
+<div id="order">
 
 <h5 id="title"></h5>
 
@@ -111,12 +106,11 @@ ID Sale
 
 <input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
 
-<h5>Total: $<span id="total">0</span></h5>
+<h5>Total: $<span class="total" id="total">0</span></h5>
 
-<button class="btn btn-warning w-100"
-onclick="window.location.href='add-funds.html'">
+<a href="add-funds.html" class="btn btn-warning w-100 mt-2">
 PLACE ORDER & PAY
-</button>
+</a>
 
 </div>
 
@@ -125,45 +119,60 @@ PLACE ORDER & PAY
 <script>
 
 function login(){
+
 let u=document.getElementById("user").value;
 let p=document.getElementById("pass").value;
 
 if(!u || !p){
-alert("Enter login info");
+alert("Enter login details");
 return;
 }
 
-document.getElementById("login-page").style.display="none";
+document.getElementById("login").style.display="none";
 document.getElementById("dashboard").style.display="block";
 }
 
-// SAFE DATA
 const data={
-fb:{title:"Facebook Services",items:[
+
+fb:{
+title:"Facebook Services",
+items:[
 {name:"Page Promotion",price:1.2},
 {name:"Post Boost",price:0.6}
-]},
-yt:{title:"YouTube Services",items:[
-{name:"Views",price:2},
-{name:"Subscribers",price:5}
-]},
-ff:{title:"Free Fire",items:[
-{name:"Diamonds",price:1},
+]
+},
+
+yt:{
+title:"YouTube Services",
+items:[
+{name:"Views Promotion",price:2},
+{name:"Subscribers Growth",price:5}
+]
+},
+
+ff:{
+title:"Free Fire Services",
+items:[
+{name:"Diamonds Top-up",price:1},
 {name:"Membership",price:2}
-]},
-id:{title:"ID Sale",items:[
-{name:"Game ID",price:10},
-{name:"Old Account",price:3}
-]}
+]
+},
+
+id:{
+title:"ID Sale Services",
+items:[
+{name:"Game Account",price:10},
+{name:"Old FB Account",price:3}
+]
+}
+
 };
 
 function openService(key){
 
 let d=data[key];
 
-if(!d) return;
-
-document.getElementById("order-box").style.display="block";
+document.getElementById("order").style.display="block";
 document.getElementById("title").innerText=d.title;
 
 let sel=document.getElementById("service");
