@@ -1,205 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Add Funds - ABR PANEL</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-
-body{
-    background:#f1f5f9;
-    font-family:Segoe UI;
-}
-
-.main-box{
-    max-width:500px;
-    margin:auto;
-    margin-top:40px;
-}
-
-.card-box{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
-
-.pay-btn{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-.method{
-    border:2px solid #eee;
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.method:hover{
-    border-color:#0d6efd;
-    background:#f8fbff;
-}
-
-.number{
-    font-size:20px;
-    font-weight:bold;
-    color:#198754;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="main-box">
-
-    <!-- HEADER -->
-    <div class="card-box text-center">
-
-        <h2 class="fw-bold">
-            ADD FUNDS
-        </h2>
-
-        <p class="text-muted">
-            Send Money & Recharge Balance
-        </p>
-
-    </div>
-
-    <!-- PAYMENT METHODS -->
-    <div class="card-box">
-
-        <h5 class="fw-bold mb-3">
-            Payment Methods
-        </h5>
-
-        <div class="method">
-
-            <h6 class="fw-bold">
-                Bkash Personal
-            </h6>
-
-            <div class="number">
-                01766380931
-            </div>
-
-        </div>
-
-        <div class="method">
-
-            <h6 class="fw-bold">
-                Nagad Personal
-            </h6>
-
-            <div class="number">
-                01766380931
-            </div>
-
-        </div>
-
-        <div class="method">
-
-            <h6 class="fw-bold">
-                Rocket
-            </h6>
-
-            <div class="number">
-                01766380931
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- PAYMENT FORM -->
-    <div class="card-box">
-
-        <h5 class="fw-bold mb-3">
-            Submit Payment
-        </h5>
-
-        <div class="mb-3">
-
-            <label class="form-label">
-                Your Number
-            </label>
-
-            <input type="text"
-            class="form-control"
-            placeholder="Enter your number">
-
-        </div>
-
-        <div class="mb-3">
-
-            <label class="form-label">
-                Amount
-            </label>
-
-            <input type="number"
-            class="form-control"
-            placeholder="Enter amount">
-
-        </div>
-
-        <div class="mb-3">
-
-            <label class="form-label">
-                Transaction ID
-            </label>
-
-            <input type="text"
-            class="form-control"
-            placeholder="Enter transaction ID">
-
-        </div>
-
-        <button
-        onclick="successPay()"
-        class="btn btn-success pay-btn">
-
-        SUBMIT PAYMENT
-
-        </button>
-
-    </div>
-
-    <!-- BACK BUTTON -->
-    <button
-    onclick="window.location.href='profile.html'"
-    class="btn btn-dark pay-btn">
-
-    BACK TO PROFILE
-
-    </button>
-
-</div>
-
-</div>
-
 <script>
 
-function successPay(){
+// ================================
+// BASIC SECURITY SYSTEM
+// ================================
 
-    alert("Payment Submitted Successfully!");
+// Disable Right Click
+document.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+});
+
+// Disable Inspect Keys
+document.onkeydown = function(e){
+
+    // F12
+    if(e.keyCode == 123){
+        return false;
+    }
+
+    // CTRL + SHIFT + I
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 73){
+        return false;
+    }
+
+    // CTRL + SHIFT + J
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 74){
+        return false;
+    }
+
+    // CTRL + U
+    if(e.ctrlKey && e.keyCode == 85){
+        return false;
+    }
+
+};
+
+// ================================
+// LOGIN SECURITY
+// ================================
+
+function handleLogin(){
+
+    const username =
+    document.getElementById('user').value;
+
+    const password =
+    document.getElementById('pass').value;
+
+    if(
+        username === "admin" &&
+        password === "12345"
+    ){
+
+        document.getElementById('login-page').style.display = 'none';
+
+        document.getElementById('dashboard').style.display = 'block';
+
+    }else{
+
+        alert("Wrong Username or Password");
+
+    }
+
+}
+
+// ================================
+// SERVICE DATABASE
+// ================================
+
+const serviceData = {
+
+    'fb': {
+        title: "Facebook Services",
+        options: [
+            { name: "FB Page Followers", price: 1.20 },
+            { name: "FB Video Views", price: 0.60 },
+            { name: "FB Post Likes", price: 0.40 }
+        ]
+    },
+
+    'yt': {
+        title: "YouTube Services",
+        options: [
+            { name: "YT Watch Time", price: 12.50 },
+            { name: "YT Subscribers", price: 4.80 },
+            { name: "YT Views", price: 2.10 }
+        ]
+    },
+
+    'ff': {
+        title: "Free Fire Top-up",
+        options: [
+            { name: "115 Diamonds", price: 0.85 },
+            { name: "240 Diamonds", price: 1.75 },
+            { name: "Weekly Membership", price: 1.60 }
+        ]
+    },
+
+    'id': {
+        title: "ID Sale",
+        options: [
+            { name: "FF Level 60+ ID", price: 15.00 },
+            { name: "Facebook Old Account", price: 2.00 }
+        ]
+    }
+
+};
+
+// ================================
+// SHOW ORDER FORM
+// ================================
+
+function showOrderForm(cat){
+
+    const data = serviceData[cat];
+
+    document.getElementById('order-section').style.display = 'block';
+
+    document.getElementById('category-title').innerText =
+    data.title;
+
+    let select =
+    document.getElementById('service-select');
+
+    select.innerHTML = '';
+
+    data.options.forEach(opt => {
+
+        let el = document.createElement('option');
+
+        el.text = opt.name;
+
+        el.value = opt.price;
+
+        select.add(el);
+
+    });
+
+    updatePrice();
+
+    window.scrollTo(0, document.body.scrollHeight);
+
+}
+
+// ================================
+// PRICE UPDATE
+// ================================
+
+function updatePrice(){
+
+    const price =
+    document.getElementById('service-select').value;
+
+    const qty =
+    document.getElementById('qty').value;
+
+    const bdtRate = 120;
+
+    let totalUSD;
+
+    const title =
+    document.getElementById('category-title').innerText;
+
+    if(
+        title.includes("Top-up") ||
+        title.includes("ID")
+    ){
+
+        totalUSD = price * 1;
+
+        document.getElementById('qty').disabled = true;
+
+    }else{
+
+        totalUSD = (price * qty) / 1000;
+
+        document.getElementById('qty').disabled = false;
+
+    }
+
+    document.getElementById('total-usd').innerText =
+    '$' + totalUSD.toFixed(2);
+
+    document.getElementById('total-bdt').innerText =
+    '৳' + (totalUSD * bdtRate).toFixed(2);
 
 }
 
 </script>
-
-</body>
-</html>
