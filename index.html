@@ -1,380 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM & Gaming Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<title>Add Funds - ABR PANEL</title>
 
-    <style>
-        body {
-            background-color: #f0f2f5;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        /* লগইন সেকশন */
-        #login-page {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<style>
 
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+body{
+    background:#f1f5f9;
+    font-family:Segoe UI;
+}
 
-        /* ড্যাশবোর্ড */
-        #dashboard {
-            display: none;
-            padding: 20px;
-        }
+.main-box{
+    max-width:500px;
+    margin:auto;
+    margin-top:40px;
+}
 
-        .service-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
+.card-box{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
 
-        .service-card:hover {
-            border-color: #0d6efd;
-            transform: translateY(-5px);
-        }
+.pay-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    margin-top:10px;
+}
 
-        .service-card i {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+.method{
+    border:2px solid #eee;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .order-box {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            display: none;
-            margin-top: 20px;
-        }
-    </style>
+.method:hover{
+    border-color:#0d6efd;
+    background:#f8fbff;
+}
+
+.number{
+    font-size:20px;
+    font-weight:bold;
+    color:#198754;
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- LOGIN PAGE -->
-<div id="login-page">
-    <div class="login-card">
+<div class="container">
 
-        <h3 class="text-center fw-bold text-primary mb-4">
-            SMM LOGIN
-        </h3>
+<div class="main-box">
 
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-
-            <input type="text"
-                   id="user"
-                   class="form-control"
-                   placeholder="Enter username">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-
-            <input type="password"
-                   id="pass"
-                   class="form-control"
-                   placeholder="Enter password">
-        </div>
-
-        <button onclick="handleLogin()"
-                class="btn btn-primary w-100 py-2 fw-bold">
-            LOGIN TO DASHBOARD
-        </button>
-
-    </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" class="container">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- HEADER -->
+    <div class="card-box text-center">
 
         <h2 class="fw-bold">
-            Welcome to Services
+            ADD FUNDS
         </h2>
 
-        <button onclick="location.reload()"
-                class="btn btn-outline-danger btn-sm">
-            Logout
-        </button>
+        <p class="text-muted">
+            Send Money & Recharge Balance
+        </p>
 
     </div>
 
-    <!-- SERVICES -->
-    <div class="row g-3">
+    <!-- PAYMENT METHODS -->
+    <div class="card-box">
 
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('fb')">
+        <h5 class="fw-bold mb-3">
+            Payment Methods
+        </h5>
 
-                <i class="fab fa-facebook text-primary"></i>
+        <div class="method">
 
-                <h6>Facebook</h6>
+            <h6 class="fw-bold">
+                Bkash Personal
+            </h6>
 
+            <div class="number">
+                01XXXXXXXXX
             </div>
+
         </div>
 
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('yt')">
+        <div class="method">
 
-                <i class="fab fa-youtube text-danger"></i>
+            <h6 class="fw-bold">
+                Nagad Personal
+            </h6>
 
-                <h6>YouTube</h6>
-
+            <div class="number">
+                01XXXXXXXXX
             </div>
+
         </div>
 
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('ff')">
+        <div class="method">
 
-                <i class="fas fa-gamepad text-warning"></i>
+            <h6 class="fw-bold">
+                Rocket
+            </h6>
 
-                <h6>Free Fire</h6>
-
+            <div class="number">
+                01XXXXXXXXX
             </div>
-        </div>
 
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('id')">
-
-                <i class="fas fa-user-check text-success"></i>
-
-                <h6>ID Sale</h6>
-
-            </div>
         </div>
 
     </div>
 
-    <!-- ORDER BOX -->
-    <div id="order-section" class="order-box shadow-sm">
+    <!-- PAYMENT FORM -->
+    <div class="card-box">
 
-        <h5 id="category-title"
-            class="fw-bold mb-3">
-            Select Service
+        <h5 class="fw-bold mb-3">
+            Submit Payment
         </h5>
 
         <div class="mb-3">
 
             <label class="form-label">
-                Choose Package
-            </label>
-
-            <select id="service-select"
-                    class="form-select"
-                    onchange="updatePrice()">
-            </select>
-
-        </div>
-
-        <div class="mb-3">
-
-            <label class="form-label">
-                Target Link / Player ID
+                Your Number
             </label>
 
             <input type="text"
-                   class="form-control"
-                   placeholder="Enter link or ID here">
+            class="form-control"
+            placeholder="Enter your number">
 
         </div>
 
         <div class="mb-3">
 
             <label class="form-label">
-                Quantity
+                Amount
             </label>
 
             <input type="number"
-                   id="qty"
-                   class="form-control"
-                   value="1000"
-                   oninput="updatePrice()">
+            class="form-control"
+            placeholder="Enter amount">
 
         </div>
 
-        <!-- PRICE -->
-        <div class="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+        <div class="mb-3">
 
-            <div>
-                <span class="text-muted">
-                    Total Cost:
-                </span>
+            <label class="form-label">
+                Transaction ID
+            </label>
 
-                <h4 class="mb-0 text-primary fw-bold"
-                    id="total-usd">
-                    $0.00
-                </h4>
-            </div>
-
-            <div class="text-end">
-
-                <span class="text-muted">
-                    In BDT:
-                </span>
-
-                <h4 class="mb-0 text-success fw-bold"
-                    id="total-bdt">
-                    ৳0.00
-                </h4>
-
-            </div>
+            <input type="text"
+            class="form-control"
+            placeholder="Enter transaction ID">
 
         </div>
 
-        <!-- FINAL BUTTON -->
         <button
-            onclick="window.location.href='add-funds.html'"
-            class="btn btn-warning w-100 mt-3 py-3 fw-bold">
+        onclick="successPay()"
+        class="btn btn-success pay-btn">
 
-            PLACE ORDER & PAY
+        SUBMIT PAYMENT
 
         </button>
 
     </div>
 
+    <!-- BACK BUTTON -->
+    <button
+    onclick="window.location.href='profile.html'"
+    class="btn btn-dark pay-btn">
+
+    BACK TO PROFILE
+
+    </button>
+
+</div>
+
 </div>
 
 <script>
 
-const serviceData = {
+function successPay(){
 
-    'fb': {
-        title: "Facebook Services",
-        options: [
-            { name: "FB Page Followers", price: 1.20 },
-            { name: "FB Video Views", price: 0.60 },
-            { name: "FB Post Likes", price: 0.40 }
-        ]
-    },
-
-    'yt': {
-        title: "YouTube Services",
-        options: [
-            { name: "YT Watch Time", price: 12.50 },
-            { name: "YT Subscribers", price: 4.80 },
-            { name: "YT Views", price: 2.10 }
-        ]
-    },
-
-    'ff': {
-        title: "Free Fire Top-up",
-        options: [
-            { name: "115 Diamonds", price: 0.85 },
-            { name: "240 Diamonds", price: 1.75 },
-            { name: "Weekly Membership", price: 1.60 }
-        ]
-    },
-
-    'id': {
-        title: "ID Sale",
-        options: [
-            { name: "FF Level 60+ ID", price: 15.00 },
-            { name: "Facebook Old Account", price: 2.00 }
-        ]
-    }
-
-};
-
-function handleLogin() {
-
-    if(
-        document.getElementById('user').value !== "" &&
-        document.getElementById('pass').value !== ""
-    ) {
-
-        document.getElementById('login-page').style.display = 'none';
-
-        document.getElementById('dashboard').style.display = 'block';
-
-    } else {
-
-        alert("Please enter username and password");
-
-    }
-
-}
-
-function showOrderForm(cat) {
-
-    const data = serviceData[cat];
-
-    document.getElementById('order-section').style.display = 'block';
-
-    document.getElementById('category-title').innerText = data.title;
-
-    let select = document.getElementById('service-select');
-
-    select.innerHTML = '';
-
-    data.options.forEach(opt => {
-
-        let el = document.createElement('option');
-
-        el.text = opt.name;
-
-        el.value = opt.price;
-
-        select.add(el);
-
-    });
-
-    updatePrice();
-
-    window.scrollTo(0, document.body.scrollHeight);
-
-}
-
-function updatePrice() {
-
-    const price = document.getElementById('service-select').value;
-
-    const qty = document.getElementById('qty').value;
-
-    const bdtRate = 120;
-
-    let totalUSD;
-
-    const title =
-    document.getElementById('category-title').innerText;
-
-    if(title.includes("Top-up") || title.includes("ID")) {
-
-        totalUSD = price * 1;
-
-        document.getElementById('qty').disabled = true;
-
-    } else {
-
-        totalUSD = (price * qty) / 1000;
-
-        document.getElementById('qty').disabled = false;
-
-    }
-
-    document.getElementById('total-usd').innerText =
-    '$' + totalUSD.toFixed(2);
-
-    document.getElementById('total-bdt').innerText =
-    '৳' + (totalUSD * bdtRate).toFixed(2);
+    alert("Payment Submitted Successfully!");
 
 }
 
