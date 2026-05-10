@@ -1,80 +1,384 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR Panel - Dashboard</title>
+    <title>SMM & Gaming Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        /* পুরো সাইটের ডিজাইন */
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #121212; color: white; margin: 0; padding: 10px; }
-        .card { background: #1e1e1e; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
-        
-        /* ওপরের সবুজ পেমেন্ট সেকশন (যা আপনি ঠিক করতে চেয়েছিলেন) */
-        .payment-banner { 
-            background-color: #28a745; 
-            padding: 15px; 
-            border-radius: 10px; 
-            text-align: center; 
-            cursor: pointer; 
-            font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* সার্ভিস বক্সগুলো */
-        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .service-item { background: #252525; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #444; }
-
-        /* ফরমের ইনপুটগুলো */
-        select, input { 
-            width: 100%; padding: 12px; margin: 8px 0; 
-            border-radius: 8px; border: 1px solid #444; 
-            background: #2b2b2b; color: white; box-sizing: border-box;
+        /* লগইন সেকশন */
+        #login-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* নিচের পেমেন্ট বাটন */
-        .order-btn { 
-            background-color: #ff8c00; color: white; 
-            padding: 15px; width: 100%; border: none; 
-            border-radius: 10px; font-weight: bold; 
-            font-size: 16px; cursor: pointer; margin-top: 10px;
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* ড্যাশবোর্ড */
+        #dashboard {
+            display: none;
+            padding: 20px;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: #0d6efd;
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .order-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="payment-banner" onclick="window.location.href='add-funds.html'">
-        ✅ পেমেন্ট করতে বা ব্যালেন্স যোগ করতে এখানে ক্লিক করুন
-    </div>
+<!-- LOGIN PAGE -->
+<div id="login-page">
+    <div class="login-card">
 
-    <div class="services-grid">
-        <div class="service-item">🔵 Facebook</div>
-        <div class="service-item">🔴 YouTube</div>
-        <div class="service-item">🎮 Free Fire</div>
-        <div class="service-item">👤 ID Sale</div>
-    </div>
+        <h3 class="text-center fw-bold text-primary mb-4">
+            SMM LOGIN
+        </h3>
 
-    <div class="card">
-        <h3>Place Order</h3>
-        <label>Select Service</label>
-        <select>
-            <option>Choose Package...</option>
-            <option>Facebook Followers</option>
-            <option>YouTube Subscribers</option>
-        </select>
+        <div class="mb-3">
+            <label class="form-label">Username</label>
 
-        <input type="text" placeholder="Target Link / Player ID">
-        <input type="number" placeholder="Quantity">
-
-        <div style="margin: 15px 0; border-top: 1px solid #333; padding-top: 10px;">
-            <p>Total Cost: <span style="color: #ff8c00;">$0.00</span></p>
-            <p>In BDT: <span style="color: #ff8c00;">৳0.00</span></p>
+            <input type="text"
+                   id="user"
+                   class="form-control"
+                   placeholder="Enter username">
         </div>
 
-        <button class="order-btn" onclick="window.location.href='add-funds.html'">
-            PLACE ORDER & PAY
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+
+            <input type="password"
+                   id="pass"
+                   class="form-control"
+                   placeholder="Enter password">
+        </div>
+
+        <button onclick="handleLogin()"
+                class="btn btn-primary w-100 py-2 fw-bold">
+            LOGIN TO DASHBOARD
         </button>
+
     </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+            Welcome to Services
+        </h2>
+
+        <button onclick="location.reload()"
+                class="btn btn-outline-danger btn-sm">
+            Logout
+        </button>
+
+    </div>
+
+    <!-- SERVICES -->
+    <div class="row g-3">
+
+        <div class="col-6 col-md-3">
+            <div class="service-card" onclick="showOrderForm('fb')">
+
+                <i class="fab fa-facebook text-primary"></i>
+
+                <h6>Facebook</h6>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="service-card" onclick="showOrderForm('yt')">
+
+                <i class="fab fa-youtube text-danger"></i>
+
+                <h6>YouTube</h6>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="service-card" onclick="showOrderForm('ff')">
+
+                <i class="fas fa-gamepad text-warning"></i>
+
+                <h6>Free Fire</h6>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="service-card" onclick="showOrderForm('id')">
+
+                <i class="fas fa-user-check text-success"></i>
+
+                <h6>ID Sale</h6>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ORDER BOX -->
+    <div id="order-section" class="order-box shadow-sm">
+
+        <h5 id="category-title"
+            class="fw-bold mb-3">
+            Select Service
+        </h5>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Choose Package
+            </label>
+
+            <select id="service-select"
+                    class="form-select"
+                    onchange="updatePrice()">
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Target Link / Player ID
+            </label>
+
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter link or ID here">
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Quantity
+            </label>
+
+            <input type="number"
+                   id="qty"
+                   class="form-control"
+                   value="1000"
+                   oninput="updatePrice()">
+
+        </div>
+
+        <!-- PRICE -->
+        <div class="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+
+            <div>
+                <span class="text-muted">
+                    Total Cost:
+                </span>
+
+                <h4 class="mb-0 text-primary fw-bold"
+                    id="total-usd">
+                    $0.00
+                </h4>
+            </div>
+
+            <div class="text-end">
+
+                <span class="text-muted">
+                    In BDT:
+                </span>
+
+                <h4 class="mb-0 text-success fw-bold"
+                    id="total-bdt">
+                    ৳0.00
+                </h4>
+
+            </div>
+
+        </div>
+
+        <!-- FINAL BUTTON -->
+        <button
+            onclick="window.location.href='add-funds.html'"
+            class="btn btn-warning w-100 mt-3 py-3 fw-bold">
+
+            PLACE ORDER & PAY
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const serviceData = {
+
+    'fb': {
+        title: "Facebook Services",
+        options: [
+            { name: "FB Page Followers", price: 1.20 },
+            { name: "FB Video Views", price: 0.60 },
+            { name: "FB Post Likes", price: 0.40 }
+        ]
+    },
+
+    'yt': {
+        title: "YouTube Services",
+        options: [
+            { name: "YT Watch Time", price: 12.50 },
+            { name: "YT Subscribers", price: 4.80 },
+            { name: "YT Views", price: 2.10 }
+        ]
+    },
+
+    'ff': {
+        title: "Free Fire Top-up",
+        options: [
+            { name: "115 Diamonds", price: 0.85 },
+            { name: "240 Diamonds", price: 1.75 },
+            { name: "Weekly Membership", price: 1.60 }
+        ]
+    },
+
+    'id': {
+        title: "ID Sale",
+        options: [
+            { name: "FF Level 60+ ID", price: 15.00 },
+            { name: "Facebook Old Account", price: 2.00 }
+        ]
+    }
+
+};
+
+function handleLogin() {
+
+    if(
+        document.getElementById('user').value !== "" &&
+        document.getElementById('pass').value !== ""
+    ) {
+
+        document.getElementById('login-page').style.display = 'none';
+
+        document.getElementById('dashboard').style.display = 'block';
+
+    } else {
+
+        alert("Please enter username and password");
+
+    }
+
+}
+
+function showOrderForm(cat) {
+
+    const data = serviceData[cat];
+
+    document.getElementById('order-section').style.display = 'block';
+
+    document.getElementById('category-title').innerText = data.title;
+
+    let select = document.getElementById('service-select');
+
+    select.innerHTML = '';
+
+    data.options.forEach(opt => {
+
+        let el = document.createElement('option');
+
+        el.text = opt.name;
+
+        el.value = opt.price;
+
+        select.add(el);
+
+    });
+
+    updatePrice();
+
+    window.scrollTo(0, document.body.scrollHeight);
+
+}
+
+function updatePrice() {
+
+    const price = document.getElementById('service-select').value;
+
+    const qty = document.getElementById('qty').value;
+
+    const bdtRate = 120;
+
+    let totalUSD;
+
+    const title =
+    document.getElementById('category-title').innerText;
+
+    if(title.includes("Top-up") || title.includes("ID")) {
+
+        totalUSD = price * 1;
+
+        document.getElementById('qty').disabled = true;
+
+    } else {
+
+        totalUSD = (price * qty) / 1000;
+
+        document.getElementById('qty').disabled = false;
+
+    }
+
+    document.getElementById('total-usd').innerText =
+    '$' + totalUSD.toFixed(2);
+
+    document.getElementById('total-bdt').innerText =
+    '৳' + (totalUSD * bdtRate).toFixed(2);
+
+}
+
+</script>
 
 </body>
 </html>
