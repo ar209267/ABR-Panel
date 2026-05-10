@@ -1,0 +1,7 @@
+ABR-PANEL-PRO/
+│
+├── index.html        (Login + Dashboard + Services)
+├── profile.html      (User Profile)
+├── wallet.html       (Add Funds)
+├── orders.html       (Order History)
+└── app.js            (Firebase Core Setup)
