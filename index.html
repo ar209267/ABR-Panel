@@ -1,165 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM & Gaming Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
-        #login-page { height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .login-card { width: 100%; max-width: 400px; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        
-        #dashboard { display: none; padding: 20px; }
-        .service-card { 
-            background: #fff; border-radius: 12px; padding: 20px; text-align: center; 
-            transition: 0.3s; cursor: pointer; border: 2px solid transparent;
-        }
-        .service-card:hover { border-color: #0d6efd; transform: translateY(-5px); }
-        .service-card i { font-size: 40px; margin-bottom: 10px; }
-        
-        .order-box { background: #fff; padding: 20px; border-radius: 12px; display: none; margin-top: 20px; }
-        
-        /* ওপরের সবুজ লাইনের ডিজাইন */
-        .payment-banner {
-            background-color: #28a745; color: white; padding: 15px; border-radius: 10px;
-            text-align: center; cursor: pointer; font-weight: bold; margin-bottom: 20px;
-            display: block; text-decoration: none;
-        }
-        .payment-banner:hover { background-color: #218838; color: white; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AR Rocky FN Panel</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+body{
+    background:#f0f2f5;
+    font-family:Segoe UI;
+}
+
+#dashboard{display:none;padding:20px}
+
+.login-card{
+    max-width:400px;
+    margin:auto;
+    margin-top:120px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-card{
+    background:#fff;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.service-card:hover{
+    transform:scale(1.03);
+}
+
+#order-box{
+    display:none;
+    background:#fff;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div id="login-page">
-    <div class="login-card">
-        <h3 class="text-center fw-bold text-primary mb-4">SMM LOGIN</h3>
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input type="text" id="user" class="form-control" placeholder="Enter username">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" id="pass" class="form-control" placeholder="Enter password">
-        </div>
-        <button onclick="handleLogin()" class="btn btn-primary w-100 py-2 fw-bold">LOGIN TO DASHBOARD</button>
-    </div>
+<!-- LOGIN -->
+<div id="login-page" class="login-card">
+
+<h3 class="text-center text-primary">LOGIN</h3>
+
+<input id="user" class="form-control mb-2" placeholder="Username">
+<input id="pass" type="password" class="form-control mb-2" placeholder="Password">
+
+<button class="btn btn-primary w-100" onclick="login()">
+Login
+</button>
+
 </div>
 
-<div id="dashboard" class="container">
-    <a href="add-funds.html" class="payment-banner">
-        <i class="fas fa-plus-circle"></i> ব্যালেন্স যোগ করতে বা পেমেন্ট করতে এখানে ক্লিক করুন
-    </a>
+<!-- DASHBOARD -->
+<div id="dashboard">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Services</h2>
-        <button onclick="location.reload()" class="btn btn-outline-danger btn-sm">Logout</button>
-    </div>
+<h4>AR Rocky FN Panel</h4>
 
-    <div class="row g-3">
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('fb')">
-                <i class="fab fa-facebook text-primary"></i>
-                <h6>Facebook</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('yt')">
-                <i class="fab fa-youtube text-danger"></i>
-                <h6>YouTube</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('ff')">
-                <i class="fas fa-gamepad text-warning"></i>
-                <h6>Free Fire</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="service-card" onclick="showOrderForm('id')">
-                <i class="fas fa-user-check text-success"></i>
-                <h6>ID Sale</h6>
-            </div>
-        </div>
-    </div>
+<div class="row g-2">
 
-    <div id="order-section" class="order-box shadow-sm">
-        <h5 id="category-title" class="fw-bold mb-3">Select Service</h5>
-        <div class="mb-3">
-            <label class="form-label">Choose Package</label>
-            <select id="service-select" class="form-select" onchange="updatePrice()"></select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Target Link / Player ID</label>
-            <input type="text" class="form-control" placeholder="Enter link or ID here">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Quantity</label>
-            <input type="number" id="qty" class="form-control" value="1000" oninput="updatePrice()">
-        </div>
-        <div class="p-3 bg-light rounded d-flex justify-content-between align-items-center">
-            <div>
-                <span class="text-muted">Total Cost:</span>
-                <h4 class="mb-0 text-primary fw-bold" id="total-usd">$0.00</h4>
-            </div>
-            <div class="text-end">
-                <span class="text-muted">In BDT:</span>
-                <h4 class="mb-0 text-success fw-bold" id="total-bdt">৳0.00</h4>
-            </div>
-        </div>
-        
-        <button onclick="window.location.href='add-funds.html'" style="background-color: #ff8c00; color: white; padding: 15px; width: 100%; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 20px;">
-            PLACE ORDER & PAY
-        </button>
-    </div>
+<div class="col-6">
+<div class="service-card" onclick="openService('fb')">
+Facebook
+</div>
+</div>
+
+<div class="col-6">
+<div class="service-card" onclick="openService('yt')">
+YouTube
+</div>
+</div>
+
+<div class="col-6 mt-2">
+<div class="service-card" onclick="openService('ff')">
+Free Fire
+</div>
+</div>
+
+<div class="col-6 mt-2">
+<div class="service-card" onclick="openService('id')">
+ID Sale
+</div>
+</div>
+
+</div>
+
+<!-- ORDER -->
+<div id="order-box">
+
+<h5 id="title"></h5>
+
+<select id="service" class="form-select mb-2" onchange="calc()"></select>
+
+<input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
+
+<h5>Total: $<span id="total">0</span></h5>
+
+<button class="btn btn-warning w-100"
+onclick="window.location.href='add-funds.html'">
+PLACE ORDER & PAY
+</button>
+
+</div>
+
 </div>
 
 <script>
-    const serviceData = {
-        'fb': { title: "Facebook Services", options: [{ name: "FB Page Followers", price: 1.20 }, { name: "FB Views", price: 0.60 }] },
-        'yt': { title: "YouTube Services", options: [{ name: "YT Subscribers", price: 4.80 }, { name: "YT Views", price: 2.10 }] },
-        'ff': { title: "Free Fire Top-up", options: [{ name: "115 Diamonds", price: 0.85 }, { name: "Weekly Membership", price: 1.60 }] },
-        'id': { title: "ID Sale", options: [{ name: "FF Level 60+ ID", price: 15.00 }, { name: "Fresh Gmail", price: 1.50 }] }
-    };
 
-    function handleLogin() {
-        if(document.getElementById('user').value !== "" && document.getElementById('pass').value !== "") {
-            document.getElementById('login-page').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-        } else { alert("Please enter username and password"); }
-    }
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
 
-    function showOrderForm(cat) {
-        const data = serviceData[cat];
-        document.getElementById('order-section').style.display = 'block';
-        document.getElementById('category-title').innerText = data.title;
-        let select = document.getElementById('service-select');
-        select.innerHTML = '';
-        data.options.forEach(opt => {
-            let el = document.createElement('option');
-            el.text = opt.name; el.value = opt.price; select.add(el);
-        });
-        updatePrice();
-        window.scrollTo(0, document.body.scrollHeight);
-    }
+if(!u || !p){
+alert("Enter login info");
+return;
+}
 
-    function updatePrice() {
-        const price = document.getElementById('service-select').value;
-        const qty = document.getElementById('qty').value;
-        const bdtRate = 120;
-        let totalUSD;
-        const title = document.getElementById('category-title').innerText;
-        if(title.includes("Top-up") || title.includes("ID Sale")) {
-            totalUSD = price * 1;
-            document.getElementById('qty').disabled = true; 
-        } else {
-            totalUSD = (price * qty) / 1000;
-            document.getElementById('qty').disabled = false;
-        }
-        document.getElementById('total-usd').innerText = '$' + totalUSD.toFixed(2);
-        document.getElementById('total-bdt').innerText = '৳' + (totalUSD * bdtRate).toFixed(2);
-    }
+document.getElementById("login-page").style.display="none";
+document.getElementById("dashboard").style.display="block";
+}
+
+// SAFE DATA
+const data={
+fb:{title:"Facebook Services",items:[
+{name:"Page Promotion",price:1.2},
+{name:"Post Boost",price:0.6}
+]},
+yt:{title:"YouTube Services",items:[
+{name:"Views",price:2},
+{name:"Subscribers",price:5}
+]},
+ff:{title:"Free Fire",items:[
+{name:"Diamonds",price:1},
+{name:"Membership",price:2}
+]},
+id:{title:"ID Sale",items:[
+{name:"Game ID",price:10},
+{name:"Old Account",price:3}
+]}
+};
+
+function openService(key){
+
+let d=data[key];
+
+if(!d) return;
+
+document.getElementById("order-box").style.display="block";
+document.getElementById("title").innerText=d.title;
+
+let sel=document.getElementById("service");
+sel.innerHTML="";
+
+d.items.forEach(i=>{
+let op=document.createElement("option");
+op.value=i.price;
+op.text=i.name;
+sel.appendChild(op);
+});
+
+calc();
+
+}
+
+function calc(){
+
+let p=document.getElementById("service").value;
+let q=document.getElementById("qty").value;
+
+if(!p || !q) return;
+
+document.getElementById("total").innerText =
+((p*q)/1000).toFixed(2);
+
+}
+
 </script>
 
 </body>
