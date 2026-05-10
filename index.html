@@ -1,19 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>ABR PANEL</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body class="p-3">
+<title>AR Rocky FN - Panel</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f4f6fb;
+    font-family:Segoe UI;
+}
+
+/* BRAND */
+.brand{
+    text-align:center;
+    padding:15px;
+    font-size:26px;
+    font-weight:bold;
+    color:#0d6efd;
+    letter-spacing:2px;
+}
+
+.brand span{
+    color:#198754;
+}
+
+/* LOGIN */
+#dashboard{display:none;padding:15px}
+
+.login-box{
+    max-width:400px;
+    margin:auto;
+    margin-top:100px;
+}
+
+/* UI BOX */
+.glow-box{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* CARD */
+.card-hover{
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card-hover:hover{
+    transform:scale(1.03);
+}
+
+.order-box{
+    display:none;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- BRAND -->
+<div class="brand">
+    AR <span>Rocky FN</span>
+</div>
 
 <!-- LOGIN -->
-<div id="login">
+<div id="login-page" class="login-box">
 
-<h3>LOGIN</h3>
+<div class="glow-box">
 
-<input id="user" class="form-control mb-2" placeholder="Email">
-<input id="pass" class="form-control mb-2" type="password" placeholder="Password">
+<h3 class="text-center">LOGIN</h3>
+
+<input id="user" class="form-control mb-2" placeholder="Username">
+<input id="pass" type="password" class="form-control mb-2" placeholder="Password">
 
 <button class="btn btn-primary w-100" onclick="login()">
 Login
@@ -21,22 +90,80 @@ Login
 
 </div>
 
+</div>
+
 <!-- DASHBOARD -->
-<div id="dash" style="display:none">
+<div id="dashboard">
 
-<h3>Dashboard</h3>
+<!-- HEADER -->
+<div class="glow-box text-center mb-3">
 
-<h5>Balance: ৳<span id="bal">0</span></h5>
+<h3 class="fw-bold text-primary">
+Welcome to AR Rocky FN
+</h3>
 
-<button class="btn btn-success mb-2"
-onclick="window.location.href='profile.html'">
-Profile
-</button>
+<p class="text-muted">
+SMM + Gaming Services Platform
+</p>
 
-<div class="card p-2 mb-2" onclick="openService('fb')">Facebook</div>
-<div class="card p-2 mb-2" onclick="openService('yt')">YouTube</div>
+<div class="row g-2">
 
-<div id="order" style="display:none" class="card p-3">
+<div class="col-6">
+<div class="card p-2 card-hover">⚡ Fast Delivery</div>
+</div>
+
+<div class="col-6">
+<div class="card p-2 card-hover">💰 Low Price</div>
+</div>
+
+<div class="col-6">
+<div class="card p-2 card-hover">🔒 Secure</div>
+</div>
+
+<div class="col-6">
+<div class="card p-2 card-hover">🚀 Instant</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- BALANCE -->
+<h5 class="text-success">
+Balance: ৳<span id="bal">0</span>
+</h5>
+
+<!-- SERVICES -->
+<div class="row g-2 mt-2">
+
+<div class="col-6">
+<div class="card p-3 text-center card-hover" onclick="openService('fb')">
+📘 Facebook
+</div>
+</div>
+
+<div class="col-6">
+<div class="card p-3 text-center card-hover" onclick="openService('yt')">
+▶️ YouTube
+</div>
+</div>
+
+<div class="col-6">
+<div class="card p-3 text-center card-hover" onclick="openService('ff')">
+🎮 Free Fire
+</div>
+</div>
+
+<div class="col-6">
+<div class="card p-3 text-center card-hover" onclick="window.location.href='profile.html'">
+👤 Profile
+</div>
+</div>
+
+</div>
+
+<!-- ORDER BOX -->
+<div id="order-box" class="order-box">
 
 <h5 id="title"></h5>
 
@@ -48,7 +175,7 @@ Profile
 
 <button class="btn btn-warning w-100"
 onclick="window.location.href='profile.html'">
-Place Order
+PLACE ORDER & PAY
 </button>
 
 </div>
@@ -57,28 +184,38 @@ Place Order
 
 <script>
 
-// SIMPLE LOGIN
+// LOGIN
 function login(){
-document.getElementById("login").style.display="none";
-document.getElementById("dash").style.display="block";
+document.getElementById("login-page").style.display="none";
+document.getElementById("dashboard").style.display="block";
 }
 
 // DATA
 const data={
-fb:{title:"Facebook",items:[
+fb:{
+title:"Facebook",
+items:[
 {name:"Followers",price:1.2},
 {name:"Likes",price:0.5}
 ]},
-yt:{title:"YouTube",items:[
+yt:{
+title:"YouTube",
+items:[
 {name:"Views",price:2},
 {name:"Subs",price:5}
+]},
+ff:{
+title:"Free Fire",
+items:[
+{name:"Diamonds",price:1}
 ]}
 };
 
 function openService(k){
+
 let s=data[k];
 
-document.getElementById("order").style.display="block";
+document.getElementById("order-box").style.display="block";
 document.getElementById("title").innerText=s.title;
 
 let sel=document.getElementById("service");
@@ -92,6 +229,7 @@ sel.appendChild(o);
 });
 
 calc();
+
 }
 
 function calc(){
