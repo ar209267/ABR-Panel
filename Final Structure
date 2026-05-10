@@ -1,0 +1,6 @@
+index.html     → User dashboard + login
+orders.html    → User order history
+wallet.html    → Add funds
+profile.html   → Profile
+admin.html     → Admin control panel
+app.js         → Firebase backend
