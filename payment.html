@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Funds - ABR PRO PANEL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .method-item {
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .method-item:hover {
+            border-color: #f59e0b;
+            background: #161e2e;
+        }
+
+        .method-img {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .instruction-box {
+            background: #16213e;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form-control {
+            background-color: #0f172a !important;
+            border: 1px solid #475569 !important;
+            color: #fff !important;
+            margin-top: 10px;
+        }
+
+        .nav-back {
+            text-decoration: none;
+            color: #f59e0b;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-back">← Back to Dashboard</a>
+    
+    <div class="payment-card">
+        <h3 class="text-center mb-4" style="color: #f59e0b;">💰 Add Funds (টাকা জমা দিন)</h3>
+        
+        <p class="text-center text-secondary mb-4">Select your preferred payment method</p>
+
+        <div class="method-item d-flex align-items-center" onclick="showDetails('bKash')">
+            <img src="https://itshams.com/wp-content/uploads/2023/12/bkash-logo.png" class="method-img" alt="bKash">
+            <div>
+                <h6 class="mb-0">bKash (Personal)</h6>
+                <small class="text-secondary">Instant Addition</small>
+            </div>
+        </div>
+
+        <div class="method-item d-flex align-items-center" onclick="showDetails('Nagad')">
+            <img src="https://itshams.com/wp-content/uploads/2023/12/nagad-logo.png" class="method-img" alt="Nagad">
+            <div>
+                <h6 class="mb-0">Nagad (Personal)</h6>
+                <small class="text-secondary">Manual Review</small>
+            </div>
+        </div>
+
+        <div class="method-item d-flex align-items-center" onclick="showDetails('Binance')">
+            <img src="https://itshams.com/wp-content/uploads/2023/12/binance-logo.png" class="method-img" alt="Binance">
+            <div>
+                <h6 class="mb-0">Binance (USDT)</h6>
+                <small class="text-secondary">Global Payment</small>
+            </div>
+        </div>
+
+        <div id="paymentDetails" style="display:none;">
+            <div class="instruction-box">
+                <p id="instructionText">বিকাশ পার্সোনাল নাম্বারে টাকা পাঠিয়ে নিচে ট্রানজেকশন আইডি দিন।</p>
+                <strong>Number: 01XXX-XXXXXX</strong><br>
+                <small>Rate: 1 USD = 130 BDT</small>
+            </div>
+
+            <label class="mt-3">Amount (USD)</label>
+            <input type="number" class="form-control" placeholder="Minimum 1 USD">
+
+            <label class="mt-2">Transaction ID</label>
+            <input type="text" class="form-control" placeholder="Enter TrxID">
+
+            <button class="btn-submit">SUBMIT PAYMENT</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDetails(method) {
+        document.getElementById('paymentDetails').style.display = 'block';
+        if(method === 'bKash') {
+            document.getElementById('instructionText').innerText = "বিকাশ পার্সোনাল নাম্বারে 'Send Money' করার পর ট্রানজেকশন আইডি (TrxID) নিচে দিন।";
+        } else if(method === 'Nagad') {
+            document.getElementById('instructionText').innerText = "নগদ পার্সোনাল নাম্বারে টাকা পাঠিয়ে আপনার ট্রানজেকশন আইডি নিচে সাবমিট করুন।";
+        } else if(method === 'Binance') {
+            document.getElementById('instructionText').innerText = "Pay with USDT (Binance Pay). Submit your Transaction Hash below.";
+        }
+    }
+</script>
+
+</body>
+</html>
