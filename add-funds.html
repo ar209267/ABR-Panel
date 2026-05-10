@@ -13,12 +13,12 @@
 
 <h5>Bkash: +8801766380931</h5>
 
-<input class="form-control mb-2" placeholder="Your Number">
+<input class="form-control mb-2" placeholder="Number">
 <input id="amount" class="form-control mb-2" placeholder="Amount">
 <input class="form-control mb-2" placeholder="TrxID">
 
 <button class="btn btn-success w-100" onclick="addBal()">
-Submit Payment
+Submit
 </button>
 
 <button class="btn btn-dark w-100 mt-2"
@@ -34,18 +34,12 @@ function addBal(){
 
 let amt=document.getElementById("amount").value;
 
-if(!amt || amt<=0){
-alert("Enter valid amount");
-return;
-}
-
 let current=localStorage.getItem("balance") || 0;
 
-let newBal=parseFloat(current)+parseFloat(amt);
+localStorage.setItem("balance",
+parseFloat(current)+parseFloat(amt));
 
-localStorage.setItem("balance",newBal);
-
-alert("Balance Added!");
+alert("Added!");
 
 window.location.href="profile.html";
 
