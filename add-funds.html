@@ -12,22 +12,46 @@
 <h3>Add Funds</h3>
 
 <h5>Bkash: +8801766380931</h5>
-<h5>Nagad: +8801766380931</h5>
-<h5>Rocket: +8801766380931</h5>
 
 <input class="form-control mb-2" placeholder="Your Number">
-<input class="form-control mb-2" placeholder="Amount">
-<input class="form-control mb-2" placeholder="Transaction ID">
+<input id="amount" class="form-control mb-2" placeholder="Amount">
+<input class="form-control mb-2" placeholder="TrxID">
 
-<button class="btn btn-success w-100" onclick="alert('Submitted')">
-Submit
+<button class="btn btn-success w-100" onclick="addBal()">
+Submit Payment
 </button>
 
-<button class="btn btn-dark w-100 mt-2" onclick="window.location.href='profile.html'">
+<button class="btn btn-dark w-100 mt-2"
+onclick="window.location.href='profile.html'">
 Back
 </button>
 
 </div>
+
+<script>
+
+function addBal(){
+
+let amt=document.getElementById("amount").value;
+
+if(!amt || amt<=0){
+alert("Enter valid amount");
+return;
+}
+
+let current=localStorage.getItem("balance") || 0;
+
+let newBal=parseFloat(current)+parseFloat(amt);
+
+localStorage.setItem("balance",newBal);
+
+alert("Balance Added!");
+
+window.location.href="profile.html";
+
+}
+
+</script>
 
 </body>
 </html>
