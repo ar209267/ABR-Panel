@@ -196,3 +196,83 @@
 <button onclick="window.location.href='add-funds.html'" style="background-color: #ff8c00; color: white; padding: 15px; width: 100%; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px;">
     PLACE ORDER & PAY
 </button>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABR Panel - Dashboard</title>
+    <style>
+        /* পুরো সাইটের ডিজাইন */
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #121212; color: white; margin: 0; padding: 10px; }
+        .card { background: #1e1e1e; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
+        
+        /* ওপরের সবুজ পেমেন্ট সেকশন (যা আপনি ঠিক করতে চেয়েছিলেন) */
+        .payment-banner { 
+            background-color: #28a745; 
+            padding: 15px; 
+            border-radius: 10px; 
+            text-align: center; 
+            cursor: pointer; 
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        /* সার্ভিস বক্সগুলো */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .service-item { background: #252525; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #444; }
+
+        /* ফরমের ইনপুটগুলো */
+        select, input { 
+            width: 100%; padding: 12px; margin: 8px 0; 
+            border-radius: 8px; border: 1px solid #444; 
+            background: #2b2b2b; color: white; box-sizing: border-box;
+        }
+
+        /* নিচের পেমেন্ট বাটন */
+        .order-btn { 
+            background-color: #ff8c00; color: white; 
+            padding: 15px; width: 100%; border: none; 
+            border-radius: 10px; font-weight: bold; 
+            font-size: 16px; cursor: pointer; margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-banner" onclick="window.location.href='add-funds.html'">
+        ✅ পেমেন্ট করতে বা ব্যালেন্স যোগ করতে এখানে ক্লিক করুন
+    </div>
+
+    <div class="services-grid">
+        <div class="service-item">🔵 Facebook</div>
+        <div class="service-item">🔴 YouTube</div>
+        <div class="service-item">🎮 Free Fire</div>
+        <div class="service-item">👤 ID Sale</div>
+    </div>
+
+    <div class="card">
+        <h3>Place Order</h3>
+        <label>Select Service</label>
+        <select>
+            <option>Choose Package...</option>
+            <option>Facebook Followers</option>
+            <option>YouTube Subscribers</option>
+        </select>
+
+        <input type="text" placeholder="Target Link / Player ID">
+        <input type="number" placeholder="Quantity">
+
+        <div style="margin: 15px 0; border-top: 1px solid #333; padding-top: 10px;">
+            <p>Total Cost: <span style="color: #ff8c00;">$0.00</span></p>
+            <p>In BDT: <span style="color: #ff8c00;">৳0.00</span></p>
+        </div>
+
+        <button class="order-btn" onclick="window.location.href='add-funds.html'">
+            PLACE ORDER & PAY
+        </button>
+    </div>
+
+</body>
+</html>
