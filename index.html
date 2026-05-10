@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AR Rocky FN Login</title>
+<title>AR Rocky FN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script type="module">
+<style>
+body{
+font-family:Arial;
+background:#f4f6fb;
+text-align:center;
+padding:30px;
+}
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+.box{
+background:white;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
 
-const firebaseConfig = {
-apiKey: "YOUR_API_KEY",
-authDomain: "YOUR_AUTH_DOMAIN",
-projectId: "YOUR_PROJECT_ID",
-appId: "YOUR_APP_ID"
-};
+button{
+padding:10px;
+width:100%;
+border:none;
+border-radius:8px;
+background:#0d6efd;
+color:white;
+font-weight:bold;
+}
+</style>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+</head>
 
-window.googleLogin = function(){
+<body>
 
-const provider = new GoogleAuthProvider();
+<h2>AR Rocky FN</h2>
 
-signInWithPopup(auth, provider)
-.then((result)=>{
+<div class="box">
 
-localStorage.setItem("user", JSON.stringify(result.user));
+<h3>Login</h3>
 
-alert("Login Success!");
+<input id="user" placeholder="Username" style="padding:10px;width:100%;margin-bottom:10px;">
+<input id="pass" type="password" placeholder="Password" style="padding:10px;width:100%;margin-bottom:10px;">
 
-window.location.href = "dashboard.html";
+<button onclick="login()">Login</button>
 
-})
-.catch((error)=>{
-alert("Login Failed: " + error.message);
-});
+</div>
+
+<div id="dash" style="display:none" class="box">
+
+<h3>Dashboard</h3>
+
+<p>Welcome to AR Rocky FN Panel</p>
+
+<button onclick="alert('Working OK')">Test Button</button>
+
+</div>
+
+<script>
+
+function login(){
+
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u && p){
+document.querySelector(".box").style.display="none";
+document.getElementById("dash").style.display="block";
+}else{
+alert("Enter data");
+}
 
 }
 
 </script>
-
-</head>
-
-<body style="font-family:Segoe UI;text-align:center;margin-top:100px">
-
-<h2>AR Rocky FN</h2>
-
-<button onclick="googleLogin()" style="
-padding:15px;
-background:red;
-color:white;
-border:none;
-border-radius:10px;
-">
-Login with Google
-</button>
 
 </body>
 </html>
