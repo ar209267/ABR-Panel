@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Funds - ABR Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding: 20px; }
+        .payment-card { background: #2d2d2d; padding: 20px; border-radius: 15px; max-width: 400px; margin: 0 auto; border: 1px solid #ff8c00; }
+        h2 { color: #ff8c00; }
+        .method { background: #3d3d3d; margin: 10px 0; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-whatsapp { background: #25d366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+    </style>
+</head>
+<body>
+
+<div class="payment-card">
+    <h2>Add Funds</h2>
+    <p>নিচের নাম্বারে টাকা পাঠিয়ে হোয়াটসঅ্যাপে নক দিন।</p>
+    
+    <div class="method">
+        <span>Bkash (Personal)</span>
+        <strong>01XXXXXXXXX</strong>
+    </div>
+    
+    <div class="method">
+        <span>Nagad (Personal)</span>
+        <strong>01XXXXXXXXX</strong>
+    </div>
+
+    <hr>
+    
+    <input type="text" id="amount" placeholder="কত ডলার লোড করবেন?">
+    <input type="text" id="trxid" placeholder="Transaction ID (TrxID)">
+    
+    <a href="#" onclick="sendToWhatsApp()" class="btn-whatsapp">Submit via WhatsApp</a>
+</div>
+
+<script>
+function sendToWhatsApp() {
+    let amount = document.getElementById('amount').value;
+    let trxid = document.getElementById('trxid').value;
+    let phone = "8801XXXXXXXXX"; // এখানে আপনার নিজের হোয়াটসঅ্যাপ নাম্বার দিন
+    let message = `Hello, I want to add funds.%0AAmount: ${amount}$ %0ATrxID: ${trxid}`;
+    window.location.href = `https://wa.me/${phone}?text=${message}`;
+}
+</script>
+
+</body>
+</html>
