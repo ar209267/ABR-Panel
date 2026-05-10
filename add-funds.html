@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Add Funds</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="p-3">
@@ -12,10 +12,10 @@
 <h5>Bkash: +8801766380931</h5>
 
 <input id="amt" class="form-control mb-2" placeholder="Amount">
-<input class="form-control mb-2" placeholder="TrxID">
+<input class="form-control mb-2" placeholder="Transaction ID">
 
 <button class="btn btn-success w-100" onclick="addBal()">
-Submit Payment
+Submit
 </button>
 
 <button class="btn btn-dark w-100 mt-2"
@@ -39,7 +39,7 @@ let current=localStorage.getItem("balance") || 0;
 localStorage.setItem("balance",
 parseFloat(current)+parseFloat(amt));
 
-alert("Balance Added!");
+alert("Submitted! Admin will verify.");
 
 window.location.href="profile.html";
 
