@@ -4,61 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AR Rocky FN Services</title>
+<title>ABR PANEL - Services</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
 body{
-    background:#f5f7fb;
+    background:#f4f6fb;
     font-family:Segoe UI;
 }
 
-/* LOGIN */
-#dashboard{display:none;padding:15px}
-
-.login-box{
-    max-width:400px;
-    margin:auto;
-    margin-top:100px;
+.header{
+    text-align:center;
+    padding:20px;
+    font-size:28px;
+    font-weight:bold;
+    color:#0d6efd;
 }
 
-.card-ui{
+.card-box{
     background:white;
     padding:15px;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
     margin-bottom:10px;
-}
-
-/* SERVICE ICON */
-.service{
-    text-align:center;
-    padding:20px;
-    border-radius:12px;
-    background:white;
     cursor:pointer;
     transition:0.3s;
 }
 
-.service:hover{
-    transform:scale(1.05);
+.card-box:hover{
+    transform:scale(1.03);
 }
 
-.service i{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-#order{
+#services{
     display:none;
     background:white;
     padding:15px;
     border-radius:12px;
     margin-top:15px;
+}
+
+.service-item{
+    border:1px solid #eee;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:8px;
 }
 
 </style>
@@ -67,81 +57,46 @@ body{
 
 <body>
 
-<!-- LOGIN -->
-<div id="login-page" class="login-box">
-
-<div class="card-ui">
-
-<h3 class="text-center">LOGIN</h3>
-
-<input id="email" class="form-control mb-2" placeholder="Email">
-
-<input id="pass" type="password" class="form-control mb-2" placeholder="Password (min 8 chars)">
-
-<button class="btn btn-primary w-100" onclick="login()">
-Login
-</button>
-
+<div class="header">
+ABR PANEL
 </div>
 
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard">
-
-<h3 class="text-center text-primary">AR Rocky FN</h3>
-
-<h5>Balance: ৳<span id="bal">0</span></h5>
-
-<div class="row g-2">
+<div class="container">
 
 <!-- FACEBOOK -->
-<div class="col-6">
-<div class="service" onclick="openService('fb')">
-<i class="fab fa-facebook text-primary"></i>
-<h6>Facebook</h6>
-</div>
+<div class="card-box" onclick="openCat('fb')">
+📘 Facebook Marketing Services
 </div>
 
 <!-- INSTAGRAM -->
-<div class="col-6">
-<div class="service" onclick="openService('ig')">
-<i class="fab fa-instagram text-danger"></i>
-<h6>Instagram</h6>
-</div>
+<div class="card-box" onclick="openCat('ig')">
+📸 Instagram Promotion Services
 </div>
 
 <!-- TIKTOK -->
-<div class="col-6">
-<div class="service" onclick="openService('tt')">
-<i class="fab fa-tiktok text-dark"></i>
-<h6>TikTok</h6>
+<div class="card-box" onclick="openCat('tt')">
+🎵 TikTok Growth Services
 </div>
+
+<!-- YOUTUBE -->
+<div class="card-box" onclick="openCat('yt')">
+▶️ YouTube Channel Services
 </div>
 
 <!-- FREE FIRE -->
-<div class="col-6">
-<div class="service" onclick="openService('ff')">
-<i class="fas fa-gamepad text-warning"></i>
-<h6>Free Fire</h6>
-</div>
+<div class="card-box" onclick="openCat('ff')">
+🎮 Free Fire Top-up & ID Services
 </div>
 
-</div>
+<!-- SERVICE BOX -->
+<div id="services">
 
-<!-- ORDER -->
-<div id="order">
+<h4 id="title"></h4>
 
-<h5 id="title"></h5>
+<div id="list"></div>
 
-<select id="service" class="form-select mb-2" onchange="calc()"></select>
-
-<input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
-
-<h5>Total: $<span id="total">0</span></h5>
-
-<button class="btn btn-success w-100">
-Place Order
+<button class="btn btn-warning w-100 mt-2">
+ORDER NOW
 </button>
 
 </div>
@@ -150,55 +105,39 @@ Place Order
 
 <script>
 
-// BALANCE
-document.getElementById("bal").innerText =
-localStorage.getItem("balance") || 0;
-
-// LOGIN VALIDATION
-function login(){
-
-let email=document.getElementById("email").value;
-let pass=document.getElementById("pass").value;
-
-if(!email || !pass){
-alert("Fill all fields");
-return;
-}
-
-if(pass.length < 8){
-alert("Password must be minimum 8 characters");
-return;
-}
-
-document.getElementById("login-page").style.display="none";
-document.getElementById("dashboard").style.display="block";
-
-}
-
-// SERVICES (SAFE STRUCTURE)
 const data={
 
 fb:{
-title:"Facebook Services",
+title:"Facebook Marketing Services",
 items:[
-{name:"Page Promotion",price:1.5},
-{name:"Post Engagement",price:0.8}
+{name:"Page Promotion Campaign",price:2},
+{name:"Content Boost Strategy",price:1.5},
+{name:"Engagement Optimization",price:1.8}
 ]
 },
 
 ig:{
 title:"Instagram Services",
 items:[
-{name:"Profile Promotion",price:1.2},
-{name:"Content Boost",price:0.9}
+{name:"Profile Growth Campaign",price:1.5},
+{name:"Reels Promotion",price:1.2},
+{name:"Brand Awareness Boost",price:2}
 ]
 },
 
 tt:{
 title:"TikTok Services",
 items:[
-{name:"Video Promotion",price:1},
-{name:"Account Growth Support",price:1.5}
+{name:"Video Promotion",price:1.3},
+{name:"Audience Growth Strategy",price:1.8}
+]
+},
+
+yt:{
+title:"YouTube Services",
+items:[
+{name:"Video Promotion Campaign",price:2.5},
+{name:"Channel Optimization",price:3}
 ]
 },
 
@@ -206,40 +145,32 @@ ff:{
 title:"Free Fire Services",
 items:[
 {name:"Diamond Top-up",price:0.02},
-{name:"ID Sale Service",price:5}
+{name:"ID Listing Service",price:5}
 ]
 }
 
 };
 
-function openService(key){
+function openCat(key){
 
 let s=data[key];
 
-document.getElementById("order").style.display="block";
+document.getElementById("services").style.display="block";
 document.getElementById("title").innerText=s.title;
 
-let sel=document.getElementById("service");
-sel.innerHTML="";
+let list=document.getElementById("list");
+list.innerHTML="";
 
 s.items.forEach(i=>{
-let opt=document.createElement("option");
-opt.value=i.price;
-opt.text=i.name;
-sel.appendChild(opt);
+
+list.innerHTML+=`
+<div class="service-item">
+<b>${i.name}</b><br>
+Price: $${i.price}
+</div>
+`;
+
 });
-
-calc();
-
-}
-
-function calc(){
-
-let p=document.getElementById("service").value;
-let q=document.getElementById("qty").value;
-
-document.getElementById("total").innerText =
-(p*q/1000).toFixed(2);
 
 }
 
