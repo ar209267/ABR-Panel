@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR Panel - Professional Dashboard</title>
+    <title>ABR PRO SMM PANEL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* আপনার মেইন প্যানেলের থিম */
         body {
             background-color: #0f172a;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .main-container {
-            max-width: 900px;
-            margin: 50px auto;
+            max-width: 600px;
+            margin: 40px auto;
             padding: 20px;
         }
         .card-custom {
@@ -22,7 +21,7 @@
             border: 1px solid #334155;
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .form-control, .form-select {
             background-color: #334155;
@@ -35,60 +34,15 @@
             border-color: #3b82f6;
             box-shadow: none;
         }
-
-        /* ফাইবার কার্ডের বিশেষ স্টাইল */
-        .fiverr-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 20px;
-        }
-        .fiverr-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 10px 25px rgba(29, 191, 115, 0.2);
-            border-color: #1dbf73;
-        }
-        .fiverr-header {
-            background: #1dbf73;
-            padding: 12px;
-            text-align: center;
-        }
-        .fiverr-logo {
-            filter: brightness(0) invert(1);
-        }
-        .service-list {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            margin: 15px 0;
-        }
-        .service-list li {
-            margin-bottom: 8px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-        }
-        .service-list li::before {
-            content: "✔";
-            color: #1dbf73;
-            margin-right: 10px;
-        }
-        .fiverr-btn {
-            background-color: #1dbf73;
+        .btn-whatsapp {
+            background-color: #25d366;
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 50px;
             font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            width: 100%;
+            transition: 0.3s;
         }
-        .fiverr-btn:hover {
-            background-color: #19a463;
+        .btn-whatsapp:hover {
+            background-color: #1da851;
             color: white;
         }
     </style>
@@ -96,69 +50,51 @@
 <body>
 
 <div class="main-container">
-    <div class="text-center mb-5">
-        <h1 class="fw-bold text-info">ABR PRO SMM PANEL</h1>
-        <p class="text-secondary">আপনার পছন্দমতো সার্ভিস সিলেক্ট করুন</p>
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-info">ABR PRO SMM PANEL</h2>
+        <p class="text-secondary small">আপনার সার্ভিস সিলেক্ট করুন</p>
     </div>
 
     <div class="card-custom">
-        <h4 class="mb-4 text-info">🔥 Create New Order</h4>
+        <h5 class="mb-4 text-info">🛒 New Order</h5>
         <form>
             <div class="mb-3">
                 <label class="form-label">Category</label>
                 <select class="form-select">
-                    <option>Select Service Category</option>
-                    <option>Facebook Services</option>
-                    <option>YouTube Services</option>
-                    <option>Instagram Services</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Service</label>
-                <select class="form-select">
-                    <option>Select Service First</option>
+                    <option>Select Service</option>
+                    <option>Facebook followers</option>
+                    <option>YouTube Watchtime</option>
+                    <option>Image Editing</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Link</label>
-                <input type="text" class="form-control" placeholder="https://example.com/your-link">
+                <input type="text" class="form-control" placeholder="Paste your link here">
             </div>
             <div class="mb-4">
                 <label class="form-label">Quantity</label>
-                <input type="number" class="form-control" placeholder="Min: 100">
+                <input type="number" class="form-control" placeholder="100">
             </div>
-            <button type="button" class="btn btn-primary w-100 py-2 fw-bold">PLACE ORDER & PAY NOW</button>
+            <button type="button" class="btn btn-primary w-100 fw-bold">PLACE ORDER</button>
         </form>
     </div>
 
-    <hr class="border-secondary my-5">
+    <div class="card-custom text-center" style="border: 1px solid #25d366;">
+        <h5 class="text-white mb-3">💬 সরাসরি যোগাযোগ ও পেমেন্ট</h5>
+        <p class="text-secondary small">যেকোনো কাস্টম অর্ডার বা পেমেন্ট সংক্রান্ত সহায়তার জন্য সরাসরি হোয়াটসঅ্যাপ করুন।</p>
+        
+        <div class="d-grid gap-2 mb-4">
+            <a href="https://wa.me/8801766380931" target="_blank" class="btn btn-whatsapp py-2">
+                Message on WhatsApp
+            </a>
+        </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="fiverr-card">
-                <div class="fiverr-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Fiverr_Logo_09.2020.png" alt="Fiverr" width="80" class="fiverr-logo">
-                </div>
-                <div class="p-4 text-center">
-                    <h4 class="text-white fw-bold">Get Services via Fiverr</h4>
-                    <p class="text-secondary small">নিরাপদ পেমেন্ট এবং প্রফেশনাল কাজের জন্য সরাসরি ফাইবার থেকে অর্ডার করুন।</p>
-                    
-                    <ul class="service-list px-md-5">
-                        <li>Image Editing & Background Removal</li>
-                        <li>Professional Signature Design</li>
-                        <li>Social Media Post Design</li>
-                        <li>Custom Web Solutions</li>
-                    </ul>
-
-                    <a href="https://www.fiverr.com/your_profile" target="_blank" class="fiverr-btn mt-2">
-                        Order Now on Fiverr
-                    </a>
-                </div>
-            </div>
+        <div class="p-3" style="background: #0f172a; border-radius: 10px; border: 1px dashed #3b82f6;">
+            <p class="mb-1 text-secondary small">Manual Payment (বিকাশ/নগদ)</p>
+            <h5 class="text-info">01766380931</h5>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>
