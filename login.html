@@ -3,67 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ABR Panel</title>
+    <title>Login - SMM Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #0f172a; /* আপনার থিমের সাথে মিল রেখে ডার্ক ব্যাকগ্রাউন্ড */
+            background-color: #f8f9fa;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
         }
         .login-card {
-            background-color: #1e293b;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 400px; /* ফর্মটি ছোট এবং মিডিলে রাখার জন্য */
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #ffffff;
         }
-        .btn-primary {
-            background-color: #3b82f6;
-            border: none;
+        .btn-login {
+            background-color: #0d6efd;
+            color: white;
+            width: 100%;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 10px;
+            text-transform: uppercase;
         }
-        .form-control {
-            background-color: #334155;
-            border: 1px solid #475569;
+        .btn-login:hover {
+            background-color: #0b5ed7;
             color: white;
         }
-        .form-control:focus {
-            background-color: #334155;
-            color: white;
-            box-shadow: none;
-            border-color: #3b82f6;
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
 <div class="login-card">
-    <div class="text-center mb-4">
-        <h2 class="fw-bold text-info">ABR Panel</h2>
-        <p class="text-secondary">Please login to continue</p>
+    <div class="brand-logo">
+        <h3 class="text-primary fw-bold">SMM PANEL</h3>
+        <p class="text-secondary">Please login to your account</p>
     </div>
-    
-    <form action="index.html"> <div class="mb-3">
-            <label class="form-label">Email or Username</label>
-            <input type="text" class="form-control" placeholder="Enter username">
+
+    <form action="index.html" method="GET">
+        <div class="mb-3">
+            <label class="form-label">Username or Email</label>
+            <input type="text" class="form-control" placeholder="Enter your username" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" placeholder="Enter password">
+            <input type="password" class="form-control" placeholder="Enter password" required>
         </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary py-2">Login to Dashboard</button>
+
+        <div class="d-flex justify-content-between mb-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <a href="#" class="text-decoration-none small">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-login mb-3">Login Now</button>
+
+        <div class="text-center">
+            <p class="small mb-0">Don't have an account? <a href="#" class="text-decoration-none">Sign Up</a></p>
         </div>
     </form>
-    
-    <div class="text-center mt-3">
-        <small class="text-secondary">Don't have an account? <a href="#" class="text-info text-decoration-none">Sign Up</a></small>
-    </div>
 </div>
 
 </body>
-</html> 
+</html>
