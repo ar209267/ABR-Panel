@@ -1,60 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ABR PANEL</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-body{background:#f0f2f5;font-family:Segoe UI}
-
-#dashboard{display:none;padding:20px}
-
-.login-box{
-max-width:400px;
-margin:auto;
-margin-top:100px;
-}
-
-.card-box{
-background:#fff;
-padding:20px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.service-card{
-background:#fff;
-padding:20px;
-border-radius:12px;
-text-align:center;
-cursor:pointer;
-}
-
-.order-box{
-display:none;
-background:#fff;
-padding:20px;
-border-radius:12px;
-margin-top:20px;
-}
-</style>
-
 </head>
-<body>
+
+<body class="p-3">
 
 <!-- LOGIN -->
-<div id="login-page" class="login-box">
+<div id="login">
 
-<div class="card-box">
+<h3>LOGIN</h3>
 
-<h3 class="text-center">LOGIN</h3>
-
-<input id="user" class="form-control mb-2" placeholder="Username">
-<input id="pass" type="password" class="form-control mb-2" placeholder="Password">
+<input id="user" class="form-control mb-2" placeholder="Email">
+<input id="pass" class="form-control mb-2" type="password" placeholder="Password">
 
 <button class="btn btn-primary w-100" onclick="login()">
 Login
@@ -62,50 +21,34 @@ Login
 
 </div>
 
-</div>
-
 <!-- DASHBOARD -->
-<div id="dashboard">
+<div id="dash" style="display:none">
 
 <h3>Dashboard</h3>
 
-<h5 class="text-success">
-Balance: ৳<span id="bal"></span>
-</h5>
+<h5>Balance: ৳<span id="bal">0</span></h5>
 
-<div class="row g-2 mt-2">
+<button class="btn btn-success mb-2"
+onclick="window.location.href='profile.html'">
+Profile
+</button>
 
-<div class="col-6">
-<div class="service-card" onclick="openService('fb')">Facebook</div>
-</div>
+<div class="card p-2 mb-2" onclick="openService('fb')">Facebook</div>
+<div class="card p-2 mb-2" onclick="openService('yt')">YouTube</div>
 
-<div class="col-6">
-<div class="service-card" onclick="openService('yt')">YouTube</div>
-</div>
-
-<div class="col-6">
-<div class="service-card" onclick="openService('ff')">Free Fire</div>
-</div>
-
-<div class="col-6">
-<div class="service-card" onclick="window.location.href='profile.html'">Profile</div>
-</div>
-
-</div>
-
-<!-- ORDER -->
-<div id="order-box" class="order-box">
+<div id="order" style="display:none" class="card p-3">
 
 <h5 id="title"></h5>
 
 <select id="service" class="form-select mb-2" onchange="calc()"></select>
 
-<input id="qty" class="form-control mb-2" type="number" value="1000" oninput="calc()">
+<input id="qty" class="form-control mb-2" value="1000" oninput="calc()">
 
 <h5>Total: $<span id="total">0</span></h5>
 
-<button class="btn btn-warning w-100" onclick="window.location.href='profile.html'">
-PLACE ORDER & PAY
+<button class="btn btn-warning w-100"
+onclick="window.location.href='profile.html'">
+Place Order
 </button>
 
 </div>
@@ -114,51 +57,28 @@ PLACE ORDER & PAY
 
 <script>
 
-// BALANCE
-function getBal(){
-return localStorage.getItem("balance") || 0;
-}
-
-document.getElementById("bal").innerText = getBal();
-
-// LOGIN
+// SIMPLE LOGIN
 function login(){
-let u=document.getElementById("user").value;
-let p=document.getElementById("pass").value;
-
-if(u && p){
-document.getElementById("login-page").style.display="none";
-document.getElementById("dashboard").style.display="block";
-}else{
-alert("Fill all fields");
-}
+document.getElementById("login").style.display="none";
+document.getElementById("dash").style.display="block";
 }
 
 // DATA
 const data={
-fb:{
-title:"Facebook",
-items:[
+fb:{title:"Facebook",items:[
 {name:"Followers",price:1.2},
-{name:"Likes",price:0.4}
+{name:"Likes",price:0.5}
 ]},
-yt:{
-title:"YouTube",
-items:[
+yt:{title:"YouTube",items:[
 {name:"Views",price:2},
 {name:"Subs",price:5}
-]},
-ff:{
-title:"Free Fire",
-items:[
-{name:"Diamonds",price:1}
 ]}
 };
 
 function openService(k){
 let s=data[k];
 
-document.getElementById("order-box").style.display="block";
+document.getElementById("order").style.display="block";
 document.getElementById("title").innerText=s.title;
 
 let sel=document.getElementById("service");
@@ -175,11 +95,9 @@ calc();
 }
 
 function calc(){
-let price=document.getElementById("service").value;
-let qty=document.getElementById("qty").value;
-
-document.getElementById("total").innerText=
-(price*qty/1000).toFixed(2);
+let p=document.getElementById("service").value;
+let q=document.getElementById("qty").value;
+document.getElementById("total").innerText=(p*q/1000).toFixed(2);
 }
 
 </script>
