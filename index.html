@@ -1,115 +1,164 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABR PRO | Premium SMM Panel</title>
+    <title>ABR Panel - Professional Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0f172a; color: #e2e8f0; font-family: sans-serif; padding-top: 50px; }
-        
-        /* নেভিগেশন বার (লগইন বাটনের জন্য) */
-        .navbar { background: #1e293b; border-bottom: 1px solid #334155; }
-        
-        .order-card {
-            background: #1e293b; border-radius: 15px; padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid #334155; max-width: 500px; margin: 0 auto;
+        /* আপনার মেইন প্যানেলের থিম */
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        .main-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .card-custom {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
         .form-control, .form-select {
-            background-color: #0f172a !important; border: 1px solid #475569 !important;
-            color: #fff !important; border-radius: 8px; padding: 12px;
+            background-color: #334155;
+            border: 1px solid #475569;
+            color: white;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #334155;
+            color: white;
+            border-color: #3b82f6;
+            box-shadow: none;
         }
 
-        .charge-box {
-            background: #0f172a; border-radius: 8px; padding: 15px;
-            margin-top: 20px; border: 1px dashed #475569;
+        /* ফাইবার কার্ডের বিশেষ স্টাইল */
+        .fiverr-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
         }
-
-        .btn-order {
-            background: linear-gradient(90deg, #f59e0b, #d97706);
-            border: none; color: white; font-weight: bold; padding: 15px;
-            margin-top: 20px; border-radius: 8px; width: 100%; transition: 0.3s;
-            text-decoration: none; display: inline-block; text-align: center;
+        .fiverr-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 10px 25px rgba(29, 191, 115, 0.2);
+            border-color: #1dbf73;
         }
-        
-        .btn-login { border: 1px solid #f59e0b; color: #f59e0b; font-weight: bold; }
+        .fiverr-header {
+            background: #1dbf73;
+            padding: 12px;
+            text-align: center;
+        }
+        .fiverr-logo {
+            filter: brightness(0) invert(1);
+        }
+        .service-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .service-list li {
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        .service-list li::before {
+            content: "✔";
+            color: #1dbf73;
+            margin-right: 10px;
+        }
+        .fiverr-btn {
+            background-color: #1dbf73;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+        }
+        .fiverr-btn:hover {
+            background-color: #19a463;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar fixed-top navbar-dark px-3">
-    <a class="navbar-brand text-warning fw-bold" href="#">ABR PRO</a>
-    <a href="login.html" class="btn btn-sm btn-login">Login / Sign Up</a>
-</nav>
+<div class="main-container">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-info">ABR PRO SMM PANEL</h1>
+        <p class="text-secondary">আপনার পছন্দমতো সার্ভিস সিলেক্ট করুন</p>
+    </div>
 
-<div class="container mt-5">
-    <div class="order-card">
-        <h3 class="text-center mb-4" style="color: #f59e0b;">🔥 Create New Order</h3>
-        
-        <label class="mb-1">Category</label>
-        <select id="mainCategory" class="form-select mb-3" onchange="filterServices()">
-            <option value="">Select Category</option>
-            <option value="fb">Facebook Services</option>
-            <option value="yt">YouTube Services</option>
-        </select>
+    <div class="card-custom">
+        <h4 class="mb-4 text-info">🔥 Create New Order</h4>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select">
+                    <option>Select Service Category</option>
+                    <option>Facebook Services</option>
+                    <option>YouTube Services</option>
+                    <option>Instagram Services</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Service</label>
+                <select class="form-select">
+                    <option>Select Service First</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Link</label>
+                <input type="text" class="form-control" placeholder="https://example.com/your-link">
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Quantity</label>
+                <input type="number" class="form-control" placeholder="Min: 100">
+            </div>
+            <button type="button" class="btn btn-primary w-100 py-2 fw-bold">PLACE ORDER & PAY NOW</button>
+        </form>
+    </div>
 
-        <label class="mb-1">Service</label>
-        <select id="serviceList" class="form-select mb-3" onchange="calculateTotal()">
-            <option value="0">Select Service First</option>
-        </select>
+    <hr class="border-secondary my-5">
 
-        <label class="mb-1">Link</label>
-        <input type="text" class="form-control mb-3" placeholder="Paste link here...">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="fiverr-card">
+                <div class="fiverr-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Fiverr_Logo_09.2020.png" alt="Fiverr" width="80" class="fiverr-logo">
+                </div>
+                <div class="p-4 text-center">
+                    <h4 class="text-white fw-bold">Get Services via Fiverr</h4>
+                    <p class="text-secondary small">নিরাপদ পেমেন্ট এবং প্রফেশনাল কাজের জন্য সরাসরি ফাইবার থেকে অর্ডার করুন।</p>
+                    
+                    <ul class="service-list px-md-5">
+                        <li>Image Editing & Background Removal</li>
+                        <li>Professional Signature Design</li>
+                        <li>Social Media Post Design</li>
+                        <li>Custom Web Solutions</li>
+                    </ul>
 
-        <label class="mb-1">Quantity</label>
-        <input type="number" id="quantity" class="form-control" placeholder="100" oninput="calculateTotal()">
-
-        <div class="charge-box d-flex justify-content-between">
-            <div><small class="text-secondary">Charge (USD)</small><br><strong id="chargeUSD" class="text-warning">$0.000</strong></div>
-            <div class="text-end"><small class="text-secondary">Charge (BDT)</small><br><strong id="chargeBDT" class="text-success">৳0.00</strong></div>
+                    <a href="https://www.fiverr.com/your_profile" target="_blank" class="fiverr-btn mt-2">
+                        Order Now on Fiverr
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <a href="payment.html" class="btn btn-order">PLACE ORDER & PAY NOW</a>
     </div>
 </div>
 
-<script>
-    const services = {
-        'fb': [{name: 'FB Followers - $1.50/1k', price: 1.50}],
-        'yt': [{name: 'YT Subscribers - $2.50/1k', price: 2.50}]
-    };
-
-    function filterServices() {
-        const cat = document.getElementById('mainCategory').value;
-        const list = document.getElementById('serviceList');
-        list.innerHTML = '<option value="0">Select Service</option>';
-        if(services[cat]) {
-            services[cat].forEach(s => {
-                let option = document.createElement('option');
-                option.text = s.name; option.value = s.price; list.add(option);
-            });
-        }
-    }
-
-    function calculateTotal() {
-        const price = document.getElementById('serviceList').value;
-        const qty = document.getElementById('quantity').value;
-        if(price > 0 && qty > 0) {
-            const usd = (price * qty) / 1000;
-            document.getElementById('chargeUSD').innerText = '$' + usd.toFixed(3);
-            document.getElementById('chargeBDT').innerText = '৳' + (usd * 130).toFixed(2);
-        }
-    }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html> 
-<div class="card bg-dark text-white p-4 text-center border-info">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Fiverr_Logo_09.2020.png" alt="Fiverr" width="100" class="mb-3">
-    <h4>Professional Services on Fiverr</h4>
-    <p>আমাদের প্রিমিয়াম সার্ভিসগুলো সরাসরি ফাইবার থেকে অর্ডার করতে নিচের বাটনে ক্লিক করুন।</p>
-    <a href="https://www.fiverr.com/your_username" target="_blank" class="btn btn-success fw-bold">
-        Order Now on Fiverr
-    </a>
-</div>
