@@ -11,9 +11,9 @@
 
 <h3>Profile</h3>
 
-<h5>Balance: ৳<span id="bal"></span></h5>
+<h5>Balance: ৳<span id="bal">0</span></h5>
 
-<button class="btn btn-success w-100 mt-2"
+<button class="btn btn-success w-100"
 onclick="window.location.href='add-funds.html'">
 Add Funds
 </button>
@@ -24,11 +24,6 @@ Back
 </button>
 
 </div>
-
-<script>
-document.getElementById("bal").innerText =
-localStorage.getItem("balance") || 0;
-</script>
 
 </body>
 </html>
