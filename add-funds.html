@@ -1,51 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Add Funds</title>
-<link href="cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body class="p-3">
-
-<h3>AR Rocky FN - Add Funds</h3>
-
-<h5>Bkash: +8801766380931</h5>
-
-<input id="amt" class="form-control mb-2" placeholder="Amount">
-<input class="form-control mb-2" placeholder="Transaction ID">
-
-<button class="btn btn-success w-100" onclick="addBal()">
-Submit
-</button>
-
-<button class="btn btn-dark w-100 mt-2"
-onclick="window.location.href='profile.html'">
-Back
-</button>
-
-<script>
-
-function addBal(){
-
-let amt=document.getElementById("amt").value;
-
-if(!amt || amt<=0){
-alert("Invalid amount");
-return;
+<style>
+.pay-method{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    border:1px solid #eee;
+    border-radius:12px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:0.3s;
+    background:white;
 }
 
-let current=localStorage.getItem("balance") || 0;
-
-localStorage.setItem("balance",
-parseFloat(current)+parseFloat(amt));
-
-alert("Submitted! Admin will verify.");
-
-window.location.href="profile.html";
-
+.pay-method:hover{
+    border-color:#0d6efd;
+    transform:scale(1.02);
 }
 
-</script>
+.pay-method img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+}
+</style>
 
-</body>
-</html>
+<h4 class="mb-3">Select Payment Method</h4>
+
+<div class="pay-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/BKash_logo.png">
+    <div>
+        <b>bKash Personal</b><br>
+        <small>+8801766380931</small>
+    </div>
+</div>
+
+<div class="pay-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Nagad-Logo.wine.png">
+    <div>
+        <b>Nagad Personal</b><br>
+        <small>01XXXXXXXXX</small>
+    </div>
+</div>
+
+<div class="pay-method">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Rocket_logo.svg">
+    <div>
+        <b>Rocket</b><br>
+        <small>01XXXXXXXXX</small>
+    </div>
+</div>
