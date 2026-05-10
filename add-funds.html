@@ -12,7 +12,7 @@
 <h5>Bkash: +8801766380931</h5>
 
 <input id="amt" class="form-control mb-2" placeholder="Amount">
-<input class="form-control mb-2" placeholder="Transaction ID">
+<input class="form-control mb-2" placeholder="TrxID">
 
 <button class="btn btn-success w-100" onclick="addBal()">
 Submit Payment
@@ -30,7 +30,7 @@ function addBal(){
 let amt=document.getElementById("amt").value;
 
 if(!amt || amt<=0){
-alert("Invalid Amount");
+alert("Invalid amount");
 return;
 }
 
