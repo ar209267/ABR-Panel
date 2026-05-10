@@ -1,189 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ABR PANEL</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{background:#f0f2f5;font-family:Segoe UI}
+#dashboard{display:none;padding:20px}
+.login-box{max-width:400px;margin:auto;margin-top:100px}
+.card-box{background:#fff;padding:20px;border-radius:12px;margin-bottom:15px}
+.service-card{background:#fff;padding:20px;border-radius:12px;text-align:center;cursor:pointer}
+.order-box{display:none;background:#fff;padding:20px;border-radius:12px;margin-top:20px}
+</style>
+
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-page" class="login-box">
+
+<div class="card-box">
+
+<h3 class="text-center">LOGIN</h3>
+
+<input id="user" class="form-control mb-2" placeholder="Username">
+<input id="pass" type="password" class="form-control mb-2" placeholder="Password">
+
+<button class="btn btn-primary w-100" onclick="login()">Login</button>
+
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<h3 class="mb-3">Dashboard</h3>
+
+<div class="row g-2">
+
+<div class="col-6">
+<div class="service-card" onclick="openService('fb')">Facebook</div>
+</div>
+
+<div class="col-6">
+<div class="service-card" onclick="openService('yt')">YouTube</div>
+</div>
+
+<div class="col-6">
+<div class="service-card" onclick="openService('ff')">Free Fire</div>
+</div>
+
+<div class="col-6">
+<div class="service-card" onclick="window.location.href='profile.html'">Profile</div>
+</div>
+
+</div>
+
+<!-- ORDER -->
+<div id="order-box" class="order-box mt-3">
+
+<h5 id="title"></h5>
+
+<select id="service" class="form-select mb-2" onchange="calc()"></select>
+
+<input id="qty" class="form-control mb-2" type="number" value="1000" oninput="calc()">
+
+<h5>Total: <span id="total">0</span> USD</h5>
+
+<button class="btn btn-warning w-100" onclick="window.location.href='profile.html'">
+PLACE ORDER & PAY
+</button>
+
+</div>
+
+</div>
+
 <script>
 
-// ================================
-// BASIC SECURITY SYSTEM
-// ================================
+const data = {
+fb:{
+title:"Facebook",
+items:[
+{name:"Followers",price:1.2},
+{name:"Likes",price:0.4}
+]},
+yt:{
+title:"YouTube",
+items:[
+{name:"Views",price:2},
+{name:"Subscribers",price:5}
+]},
+ff:{
+title:"Free Fire",
+items:[
+{name:"Diamonds",price:1}
+]}
+};
 
-// Disable Right Click
-document.addEventListener('contextmenu', function(e){
-    e.preventDefault();
+function login(){
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u && p){
+document.getElementById("login-page").style.display="none";
+document.getElementById("dashboard").style.display="block";
+}else{
+alert("Fill all fields");
+}
+}
+
+function openService(key){
+let s=data[key];
+document.getElementById("order-box").style.display="block";
+document.getElementById("title").innerText=s.title;
+
+let sel=document.getElementById("service");
+sel.innerHTML="";
+
+s.items.forEach(i=>{
+let opt=document.createElement("option");
+opt.value=i.price;
+opt.text=i.name;
+sel.appendChild(opt);
 });
 
-// Disable Inspect Keys
-document.onkeydown = function(e){
-
-    // F12
-    if(e.keyCode == 123){
-        return false;
-    }
-
-    // CTRL + SHIFT + I
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 73){
-        return false;
-    }
-
-    // CTRL + SHIFT + J
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 74){
-        return false;
-    }
-
-    // CTRL + U
-    if(e.ctrlKey && e.keyCode == 85){
-        return false;
-    }
-
-};
-
-// ================================
-// LOGIN SECURITY
-// ================================
-
-function handleLogin(){
-
-    const username =
-    document.getElementById('user').value;
-
-    const password =
-    document.getElementById('pass').value;
-
-    if(
-        username === "admin" &&
-        password === "12345"
-    ){
-
-        document.getElementById('login-page').style.display = 'none';
-
-        document.getElementById('dashboard').style.display = 'block';
-
-    }else{
-
-        alert("Wrong Username or Password");
-
-    }
-
+calc();
 }
 
-// ================================
-// SERVICE DATABASE
-// ================================
-
-const serviceData = {
-
-    'fb': {
-        title: "Facebook Services",
-        options: [
-            { name: "FB Page Followers", price: 1.20 },
-            { name: "FB Video Views", price: 0.60 },
-            { name: "FB Post Likes", price: 0.40 }
-        ]
-    },
-
-    'yt': {
-        title: "YouTube Services",
-        options: [
-            { name: "YT Watch Time", price: 12.50 },
-            { name: "YT Subscribers", price: 4.80 },
-            { name: "YT Views", price: 2.10 }
-        ]
-    },
-
-    'ff': {
-        title: "Free Fire Top-up",
-        options: [
-            { name: "115 Diamonds", price: 0.85 },
-            { name: "240 Diamonds", price: 1.75 },
-            { name: "Weekly Membership", price: 1.60 }
-        ]
-    },
-
-    'id': {
-        title: "ID Sale",
-        options: [
-            { name: "FF Level 60+ ID", price: 15.00 },
-            { name: "Facebook Old Account", price: 2.00 }
-        ]
-    }
-
-};
-
-// ================================
-// SHOW ORDER FORM
-// ================================
-
-function showOrderForm(cat){
-
-    const data = serviceData[cat];
-
-    document.getElementById('order-section').style.display = 'block';
-
-    document.getElementById('category-title').innerText =
-    data.title;
-
-    let select =
-    document.getElementById('service-select');
-
-    select.innerHTML = '';
-
-    data.options.forEach(opt => {
-
-        let el = document.createElement('option');
-
-        el.text = opt.name;
-
-        el.value = opt.price;
-
-        select.add(el);
-
-    });
-
-    updatePrice();
-
-    window.scrollTo(0, document.body.scrollHeight);
-
-}
-
-// ================================
-// PRICE UPDATE
-// ================================
-
-function updatePrice(){
-
-    const price =
-    document.getElementById('service-select').value;
-
-    const qty =
-    document.getElementById('qty').value;
-
-    const bdtRate = 120;
-
-    let totalUSD;
-
-    const title =
-    document.getElementById('category-title').innerText;
-
-    if(
-        title.includes("Top-up") ||
-        title.includes("ID")
-    ){
-
-        totalUSD = price * 1;
-
-        document.getElementById('qty').disabled = true;
-
-    }else{
-
-        totalUSD = (price * qty) / 1000;
-
-        document.getElementById('qty').disabled = false;
-
-    }
-
-    document.getElementById('total-usd').innerText =
-    '$' + totalUSD.toFixed(2);
-
-    document.getElementById('total-bdt').innerText =
-    '৳' + (totalUSD * bdtRate).toFixed(2);
-
+function calc(){
+let price=document.getElementById("service").value;
+let qty=document.getElementById("qty").value;
+document.getElementById("total").innerText=(price*qty/1000).toFixed(2);
 }
 
 </script>
+
+</body>
+</html>
