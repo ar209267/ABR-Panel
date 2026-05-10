@@ -10,11 +10,37 @@
 
 <style>
 body{background:#f0f2f5;font-family:Segoe UI}
+
 #dashboard{display:none;padding:20px}
-.login-box{max-width:400px;margin:auto;margin-top:100px}
-.card-box{background:#fff;padding:20px;border-radius:12px;margin-bottom:15px}
-.service-card{background:#fff;padding:20px;border-radius:12px;text-align:center;cursor:pointer}
-.order-box{display:none;background:#fff;padding:20px;border-radius:12px;margin-top:20px}
+
+.login-box{
+max-width:400px;
+margin:auto;
+margin-top:100px;
+}
+
+.card-box{
+background:#fff;
+padding:20px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.service-card{
+background:#fff;
+padding:20px;
+border-radius:12px;
+text-align:center;
+cursor:pointer;
+}
+
+.order-box{
+display:none;
+background:#fff;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+}
 </style>
 
 </head>
@@ -30,7 +56,9 @@ body{background:#f0f2f5;font-family:Segoe UI}
 <input id="user" class="form-control mb-2" placeholder="Username">
 <input id="pass" type="password" class="form-control mb-2" placeholder="Password">
 
-<button class="btn btn-primary w-100" onclick="login()">Login</button>
+<button class="btn btn-primary w-100" onclick="login()">
+Login
+</button>
 
 </div>
 
@@ -39,9 +67,13 @@ body{background:#f0f2f5;font-family:Segoe UI}
 <!-- DASHBOARD -->
 <div id="dashboard">
 
-<h3 class="mb-3">Dashboard</h3>
+<h3>Dashboard</h3>
 
-<div class="row g-2">
+<h5 class="text-success">
+Balance: ৳<span id="bal"></span>
+</h5>
+
+<div class="row g-2 mt-2">
 
 <div class="col-6">
 <div class="service-card" onclick="openService('fb')">Facebook</div>
@@ -62,7 +94,7 @@ body{background:#f0f2f5;font-family:Segoe UI}
 </div>
 
 <!-- ORDER -->
-<div id="order-box" class="order-box mt-3">
+<div id="order-box" class="order-box">
 
 <h5 id="title"></h5>
 
@@ -70,7 +102,7 @@ body{background:#f0f2f5;font-family:Segoe UI}
 
 <input id="qty" class="form-control mb-2" type="number" value="1000" oninput="calc()">
 
-<h5>Total: <span id="total">0</span> USD</h5>
+<h5>Total: $<span id="total">0</span></h5>
 
 <button class="btn btn-warning w-100" onclick="window.location.href='profile.html'">
 PLACE ORDER & PAY
@@ -82,26 +114,14 @@ PLACE ORDER & PAY
 
 <script>
 
-const data = {
-fb:{
-title:"Facebook",
-items:[
-{name:"Followers",price:1.2},
-{name:"Likes",price:0.4}
-]},
-yt:{
-title:"YouTube",
-items:[
-{name:"Views",price:2},
-{name:"Subscribers",price:5}
-]},
-ff:{
-title:"Free Fire",
-items:[
-{name:"Diamonds",price:1}
-]}
-};
+// BALANCE
+function getBal(){
+return localStorage.getItem("balance") || 0;
+}
 
+document.getElementById("bal").innerText = getBal();
+
+// LOGIN
 function login(){
 let u=document.getElementById("user").value;
 let p=document.getElementById("pass").value;
@@ -114,8 +134,30 @@ alert("Fill all fields");
 }
 }
 
-function openService(key){
-let s=data[key];
+// DATA
+const data={
+fb:{
+title:"Facebook",
+items:[
+{name:"Followers",price:1.2},
+{name:"Likes",price:0.4}
+]},
+yt:{
+title:"YouTube",
+items:[
+{name:"Views",price:2},
+{name:"Subs",price:5}
+]},
+ff:{
+title:"Free Fire",
+items:[
+{name:"Diamonds",price:1}
+]}
+};
+
+function openService(k){
+let s=data[k];
+
 document.getElementById("order-box").style.display="block";
 document.getElementById("title").innerText=s.title;
 
@@ -123,10 +165,10 @@ let sel=document.getElementById("service");
 sel.innerHTML="";
 
 s.items.forEach(i=>{
-let opt=document.createElement("option");
-opt.value=i.price;
-opt.text=i.name;
-sel.appendChild(opt);
+let o=document.createElement("option");
+o.value=i.price;
+o.text=i.name;
+sel.appendChild(o);
 });
 
 calc();
@@ -135,7 +177,9 @@ calc();
 function calc(){
 let price=document.getElementById("service").value;
 let qty=document.getElementById("qty").value;
-document.getElementById("total").innerText=(price*qty/1000).toFixed(2);
+
+document.getElementById("total").innerText=
+(price*qty/1000).toFixed(2);
 }
 
 </script>
