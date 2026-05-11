@@ -1,28 +1,31 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Funds - ABR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #fff; padding-top: 50px; }
+        .card-pay { max-width: 400px; margin: auto; border: 2px solid #FFC107; border-radius: 20px; padding: 30px; }
+        .btn-submit { background: #FFC107; color: #000; font-weight: bold; width: 100%; border-radius: 12px; padding: 12px; border: none; }
+        .method-item { background: #FFF9E6; border: 1px solid #FFC107; padding: 15px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="card-pay text-center">
+        <h4 class="fw-bold mb-4">টাকা অ্যাড করুন</h4>
+        <div class="method-item"><span>বিকাশ/নগদ/উপায়</span> <strong>01766380931</strong></div>
+        <hr>
+        <input type="number" id="amt" class="form-control mb-3" placeholder="টাকার পরিমাণ (BDT)">
+        <input type="text" id="trx" class="form-control mb-4" placeholder="Transaction ID">
+        <button onclick="pay()" class="btn-submit">পেমেন্ট ভেরিফাই করুন</button>
+    </div>
 <script>
-
-function submitPay(){
-
-let n=document.getElementById("number").value;
-let a=document.getElementById("amount").value;
-let t=document.getElementById("trx").value;
-
-if(!n || !a || !t){
-alert("Fill all fields");
-return;
-}
-
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-orders.push({
-number:n,
-amount:a,
-trx:t
-});
-
-localStorage.setItem("orders", JSON.stringify(orders));
-
-alert("Submitted! Waiting for admin approval.");
-
-}
-
+    function pay() {
+        let a = document.getElementById('amt').value;
+        let t = document.getElementById('trx').value;
+        window.location.href = `https://wa.me/8801766380931?text=AddMoney%20Amount:${a}%20TrxID:${t}`;
+    }
 </script>
+</body>
+</html>
