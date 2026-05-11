@@ -1,7 +1,111 @@
-<button
-onclick="window.location.href='profile.html'"
-class="btn btn-warning w-100 mt-3 py-3 fw-bold">
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>ABR SMM - Professional Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #fff; color: #333; font-family: 'Inter', sans-serif; }
+        
+        /* প্রোফাইল ও ব্যালেন্স বার */
+        .header-bar { background: #fff; border-bottom: 3px solid #FFC107; padding: 15px; position: sticky; top: 0; z-index: 1000; }
+        .user-info img { width: 40px; border-radius: 50%; border: 2px solid #FFC107; }
+        .wallet-box { background: #FFC107; color: #000; padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 14px; }
 
-PLACE ORDER & PAY
+        /* আধুনিক সার্ভিস আইকন */
+        .service-grid .card { border: 1px solid #f1f1f1; border-radius: 18px; transition: 0.3s; cursor: pointer; }
+        .service-grid .card:hover { border-color: #FFC107; box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15); }
+        
+        /* হিস্টোরি বক্স */
+        .history-box { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 20px; margin-top: 30px; }
+        .status-badge { background: #e7f3ff; color: #0d6efd; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; }
 
-</button>
+        .btn-order { background: #000; color: #FFC107; padding: 14px; border-radius: 12px; font-weight: bold; width: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+<div class="header-bar shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="user-info d-flex align-items-center">
+            <img src="https://ui-avatars.com/api/?name=Atiq&background=FFC107&color=000" alt="Profile">
+            <div class="ms-2">
+                <span class="fw-bold d-block" style="font-size: 14px;">Atiq (Verified)</span>
+                <small class="text-muted" style="font-size: 10px;">Server: Fiverr Secure</small>
+            </div>
+        </div>
+        <div>
+            <span class="wallet-box"><i class="fas fa-dollar-sign"></i> <span id="userBal">0.00</span></span>
+            <a href="add-funds.html" class="btn btn-dark btn-sm ms-2" style="border-radius: 50px;">+ Fund</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h5 class="fw-bold mb-3">সবগুলো সার্ভিস</h5>
+    <div class="row g-3 service-grid">
+        <div class="col-4 col-md-2 text-center" onclick="loadS('FB')"><div class="card p-3"><i class="fab fa-facebook text-primary fa-2x"></i><br><small>Facebook</small></div></div>
+        <div class="col-4 col-md-2 text-center" onclick="loadS('YT')"><div class="card p-3"><i class="fab fa-youtube text-danger fa-2x"></i><br><small>YouTube</small></div></div>
+        <div class="col-4 col-md-2 text-center" onclick="loadS('FF')"><div class="card p-3"><i class="fas fa-gamepad text-warning fa-2x"></i><br><small>Free Fire</small></div></div>
+        <div class="col-4 col-md-2 text-center" onclick="loadS('META')"><div class="card p-3"><i class="fas fa-check-circle text-info fa-2x"></i><br><small>Meta</small></div></div>
+        <div class="col-4 col-md-2 text-center" onclick="loadS('ID')"><div class="card p-3"><i class="fas fa-id-card text-success fa-2x"></i><br><small>ID Sale</small></div></div>
+        <div class="col-4 col-md-2 text-center" onclick="loadS('TIK')"><div class="card p-3"><i class="fab fa-tiktok text-dark fa-2x"></i><br><small>TikTok</small></div></div>
+    </div>
+
+    <div id="formBox" class="card p-4 mt-4 shadow-sm border-0" style="display:none; border-radius: 20px; border: 1px solid #FFC107 !important;">
+        <h5 id="sTitle" class="fw-bold mb-3">অর্ডার করুন</h5>
+        <select id="pkg" class="form-select mb-3 border-warning" onchange="updateP()"></select>
+        <input type="text" id="link" class="form-control mb-3" placeholder="Target Link / ID">
+        <div class="p-3 rounded mb-3" style="background: #FFF9E6;">
+            <div class="d-flex justify-content-between"><span>Price:</span><strong id="uP" class="text-primary">$0.00</strong></div>
+            <div class="d-flex justify-content-between"><span>In BDT:</span><strong id="bP" class="text-success">৳0.00</strong></div>
+        </div>
+        <button onclick="saveOrder()" class="btn-order">PLACE ORDER & PAY</button>
+    </div>
+
+    <div class="history-box shadow-sm mb-5">
+        <h6 class="fw-bold mb-3"><i class="fas fa-list"></i> সাম্প্রতিক অর্ডার হিস্টোরি</h6>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>তারিখ</th><th>প্যাকেজ</th><th>মূল্য</th><th>স্ট্যাটাস</th></tr></thead>
+                <tbody id="hList"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const data = {
+        'FF': [{n: "115 Diamonds", p: 0.85}, {n: "Weekly Membership", p: 1.60}, {n: "Level Up Pass", p: 1.40}],
+        'FB': [{n: "1K Follower", p: 2.5}, {n: "60K WatchTime", p: 14}, {n: "Meta Verify Setup", p: 60}],
+        'YT': [{n: "1K Subscriber", p: 15}, {n: "4K WatchTime", p: 32}],
+        'ID': [{n: "FF Lvl 60 ID", p: 25}, {n: "Old FB ID", p: 5}]
+    };
+
+    function loadS(c) {
+        document.getElementById('formBox').style.display = 'block';
+        document.getElementById('sTitle').innerText = c + " Service";
+        let s = document.getElementById('pkg'); s.innerHTML = '';
+        data[c].forEach(o => { let e = document.createElement('option'); e.text = o.n; e.value = o.p; s.add(e); });
+        updateP();
+    }
+
+    function updateP() {
+        let p = document.getElementById('pkg').value;
+        document.getElementById('uP').innerText = '$' + parseFloat(p).toFixed(2);
+        document.getElementById('bP').innerText = '৳' + (p * 125).toFixed(2);
+    }
+
+    function saveOrder() {
+        let n = document.getElementById('pkg').options[document.getElementById('pkg').selectedIndex].text;
+        let pr = document.getElementById('uP').innerText;
+        let dt = new Date().toLocaleDateString();
+        
+        let row = `<tr><td>${dt}</td><td>${n}</td><td>${pr}</td><td><span class="status-badge">Processing</span></td></tr>`;
+        document.getElementById('hList').innerHTML = row + document.getElementById('hList').innerHTML;
+        alert("অর্ডার সফল! ব্যালেন্স না থাকলে টাকা অ্যাড করুন।");
+    }
+</script>
+</body>
+</html>
